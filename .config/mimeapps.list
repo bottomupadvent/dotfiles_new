@@ -1,0 +1,10 @@
+[Added Associations]
+text/x-python=abiword.desktop;firefox.desktop;
+application/pdf=mupdf.desktop;
+image/jpeg=userapp-feh -m-6DT49Z.desktop;userapp-feh -.-BANFA0.desktop;userapp-feh -Z-S8XIA0.desktop;userapp-feh -Z-8YA79Z.desktop;
+
+[Default Applications]
+image/jpeg=userapp-feh -.-BANFA0.desktop
+application/pdf=mupdf.desktop
+
+[Removed Associations]

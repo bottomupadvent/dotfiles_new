@@ -1,0 +1,24 @@
+backend = "xrender";
+# opacity-rule = ["100:name *= 'i3bar'","100:name *= 'firefox'", "100:name *= 'qutebrowser'","100:name *= 'feh'","100:name *= 'mpv'"];
+
+
+inactive-opacity = 1;
+active-opacity = 1;
+# inactive-dim = 0.20;
+use-ewmh-active-win = true;
+
+shadow = true;
+shadow-radius = 9;
+shadow-opacity = 5.5;
+dock-shadow = false;		# Avoid drawing shadows on dock/panel windows.
+dnd-shadow = false;		# Don't draw shadows on DND windows.
+
+shadow-offset-x = -10;		# The left offset for shadows. (default -15)
+shadow-offset-y = -10;		# The top offset for shadows. (default -15)
+
+
+# Fading
+fading = true; 	  		# Fade windows during opacity changes.
+fade-delta = 5; 		# The time between steps in a fade in milliseconds. (default 10).
+fade-in-step = 0.028; 		# Opacity change between steps while fading in. (default 0.028).
+fade-out-step = 0.03; 		# Opacity change between steps while fading out. (default 0.03).
