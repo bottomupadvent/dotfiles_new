@@ -103,6 +103,7 @@ export LANG=en_US.UTF-8
 
 antigen bundle git
 antigen bundle desyncr/auto-ls
+antigen apply
 
 # Enable colors and change prompt:
 source $ZSH/oh-my-zsh.sh
@@ -184,7 +185,7 @@ se(){
 alias grep="grep --color=auto"
 alias ls="ls --group-directories-first --color "
 alias la="ls -a --group-directories-first --color "
-alias ll="ls -al --group-directories-first --color "
+alias ll="ls -al--group-directories-first --color "
 alias p="sudo pacman"
 alias l="less"
 alias tree="tree -C"
@@ -192,7 +193,7 @@ alias pg="ping google.com"
 alias ccr="killall compton && compton --config ~/.config/compton/config -b"
 alias feh="feh -. "
 alias sz="source ~/.zshrc"
-
+alias config='/usr/bin/git --git-dir=/home/sols/.cfg/ --work-tree=/home/sols'
 
 export FZF_DEFAULT_COMMAND='ag --hidden -p ~/.ag_zsh_ignore --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

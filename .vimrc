@@ -18,6 +18,9 @@ Plug 'vim-syntastic/syntastic'
 Plug 'tomtom/tcomment_vim'
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-obsession'
+" used to autoread a vim buffer if the file is changed outside of vim
+" Note - This plugin only works if a command is triggered within tmux.
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 call plug#end()
 

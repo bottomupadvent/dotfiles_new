@@ -25,9 +25,9 @@ set $term st
 #Workspace settings 
 set $ws1 "1" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
 set $ws2 "2" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
+set $ws3 "3" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
+set $ws4 "4" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
+set $ws5 "5" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -180,7 +180,7 @@ bindsym XF86AudioRaiseVolume        exec $inc
 bindsym XF86AudioLowerVolume        exec $dec
 bindsym XF86AudioMute               exec $headphonetoggle
 
-bindsym --release $mod+F2           exec scrot -s
+bindsym --release $mod+F2           exec scrot s.png -s -f 
 bindsym $mod+F3                	    exec ~/.scripts/shell_scripts/polyhide.sh
 bindsym $mod+F4                     exec ~/.scripts/shell_scripts/redshift.sh
 

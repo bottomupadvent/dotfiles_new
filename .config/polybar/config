@@ -57,9 +57,9 @@ padding-left = 2
 padding-right = 2
 module-margin = 1.5
 
-modules-left = volume backlight battery mpd
+modules-left = wlan
 modules-center = i3
-modules-right = temperature date time wlan 
+modules-right = temperature date time
 
 tray-position = none
 tray-detached = true
@@ -79,6 +79,7 @@ label-unfocused-foreground = #afafaf
 label-focused-foreground = #c5a9f9
 label-urgent-foreground = #ff0000
 
+
 [module/time]
 type = internal/date
 
@@ -86,34 +87,68 @@ interval = 1.0
 
 date = -> %I:%M %p
 
+
 [module/date]
 type = internal/date
 date = >%e %B - %A
 label = %date%
 
 
-; [module/battery]
-; type = internal/battery
+[module/wlan]
+type = internal/network
+
+interface = wlp0s19f2u1u3
+interval = 5
+
+label-connected = ON
+; label-disconnected = OFF 
+; unknown-as-up = true
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline = #9f78e1
+label-disconnected = %essid%
+
+
+[module/temperature]
+type = internal/temperature
+
+;  Seconds to sleep between updates
+;  Default: 1
+interval = 0.5
+
+; Thermal zone to use
+; To list all the zone types, run 
+; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+; Default: 0
+thermal-zone = 0
+
+
+; Full path of temperature sysfs path
+; Use `sensors` to find preferred temperature source, then run
+; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null ||
+; echo $(basename ${i%_*})) $(readlink -f $i)"; done
+; to find path to desired file
+; Default reverts to thermal zone setting
+hwmon-path = /sys/devices/pci0000:00/0000:00:01.0/hwmon/hwmon2/temp1_input
+
+; Threshold temperature to display warning label (in degrees celsius)
+; Default: 80
+warn-temperature = 60
+label = %temperature-c%
+
+; [module/cpu]
+; type = internal/cpu
+; label =  %percentage%%
+
+
+; [module/memory]
+; type = internal/memory
+; label =  %gb_used%
 ; 
-; battery = BAT1
-; 
-; poll-interval = 1
-; 
-; full-at = 95
-; 
-; label-discharging = %percentage%%
-; label-charging = %percentage%%
-; label-full = %percentage%%
-; 
-; format-discharging = <ramp-capacity> <label-discharging>
-; format-full = <ramp-capacity> <label-full>
-; format-charging =  <label-charging>
-; 
-; ramp-capacity-0 = 
-; ramp-capacity-1 = 
-; ramp-capacity-2 = 
-; ramp-capacity-3 = 
-; ramp-capacity-4 = 
+; [module/network]
+; type = internal/network
+; interface = wlp2s0
+; label-connected =  %downspeed% |  %upspeed%
 
 ; [module/volume]
 ; type = internal/alsa
@@ -154,75 +189,3 @@ label = %date%
 ; bar-progress-indicator = |
 ; bar-progress-fill = ─
 ; bar-progress-empty = ─
-
-; [module/backlight]
-; type = internal/backlight
-; 
-; ; Use the following command to list available cards:
-; ; $ ls -1 /sys/class/backlight/
-; card = radeon_bl0
-; 
-; format = <ramp> <label>
-; 
-; label = %percentage%%
-; 
-; ramp-0 = 
-; ramp-1 = 
-; ramp-2 = 
-
-; [module/wlan]
-; type = internal/network
-; 
-; interface = wlx60e3270b725e 
-; 
-; interval = 5
-; 
-; label-connected =  
-; label-disconnected =  
-; 
-; [module/cpu]
-; type = internal/cpu
-; label =  %percentage%%
-
-
-; [module/memory]
-; type = internal/memory
-; label =  %gb_used%
-; 
-; [module/network]
-; type = internal/network
-; interface = wlp2s0
-; label-connected =  %downspeed% |  %upspeed%
-
-[module/temperature]
-type = internal/temperature
-
-;  Seconds to sleep between updates
-;  Default: 1
-interval = 0.5
-
-; Thermal zone to use
-; To list all the zone types, run 
-; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
-; Default: 0
-thermal-zone = 0
-
-
-; Full path of temperature sysfs path
-; Use `sensors` to find preferred temperature source, then run
-; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null ||
-; echo $(basename ${i%_*})) $(readlink -f $i)"; done
-; to find path to desired file
-; Default reverts to thermal zone setting
-hwmon-path = /sys/devices/pci0000:00/0000:00:01.0/hwmon/hwmon2/temp1_input
-
-; Threshold temperature to display warning label (in degrees celsius)
-; Default: 80
-warn-temperature = 60
-label = %temperature-c%
-
-[bar/float]
-
-inherit = bar/white
-background = #ffffff
-tray-position = center
