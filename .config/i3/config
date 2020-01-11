@@ -180,7 +180,7 @@ bindsym XF86AudioRaiseVolume        exec $inc
 bindsym XF86AudioLowerVolume        exec $dec
 bindsym XF86AudioMute               exec $headphonetoggle
 
-bindsym --release $mod+F2           exec scrot s.png -s -f 
+bindsym --release $mod+F2           exec scrot s.png -s
 bindsym $mod+F3                	    exec ~/.scripts/shell_scripts/polyhide.sh
 bindsym $mod+F4                     exec ~/.scripts/shell_scripts/redshift.sh
 
@@ -211,23 +211,23 @@ bindsym $mod+F4                     exec ~/.scripts/shell_scripts/redshift.sh
 
 # EXEC AND EXEC_ALWAYS
 # exec --no-startup-id redshift &
-exec --no-startup-id mpd
-exec --no-startup-id pcmanfm
+# exec --no-startup-id mpd
+# exec --no-startup-id pcmanfm
 # exec --no-startup-id transmission-daemon -g /home/instincts/.config/transmission-daemon
-exec --no-startup-id nm-applet
-exec --no-startup-id xinput --set-prop 8 293 0, 1
+# exec --no-startup-id nm-applet
+# exec --no-startup-id xinput --set-prop 8 293 0, 1
 
 # Unclutter makes the mouse invisible after a brief period
-exec --no-startup-id unclutter
+# exec --no-startup-id unclutter
 
-exec --no-startup-id compton --config ~/.config/compton/config -b 
-exec feh --bg-fill ~/.config/wall.png
-exec --no-startup-id bash ~/.config/polybar/launch.sh
-exec --no-startup-id nmcli networking on
+# exec --no-startup-id compton --config ~/.config/compton/config -b 
+# exec feh --bg-fill ~/.config/wall.png
+# exec --no-startup-id bash ~/.config/polybar/launch.sh
+# exec --no-startup-id nmcli networking on
 exec_always --no-startup-id sleep 1 && xmodmap ~/.Xmodmap
 # exec_always --no-startup-id sleep 2.5 && bash ~/Solstice/bash_scripts/alsa/alsa.sh
-exec_always --no-startup-id sleep 1 && xset r rate 250 0
-focus_follows_mouse no
+# exec_always --no-startup-id sleep 1 && xset r rate 250 0
+# focus_follows_mouse no
 
 
 force_focus_wrapping no
@@ -247,6 +247,8 @@ hide_edge_borders on
 # } 
 
 # bindsym $ctrl+tab bar hidden_state toggle
+bindsym $mod+F5 killall polybar && gaps 0
+
 
 
 
@@ -254,7 +256,7 @@ hide_edge_borders on
 floating_modifier $mod
 
 #For no window bar
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 3
 hide_edge_borders both
 
 #inner and outer gaps
@@ -274,7 +276,8 @@ set $inactive-text-color #1f2022FF
 # set $new                 #494949
 # set $new                 #cccc00FF
 # set $new                 #82AAFFFF
-set $new                 #b5cdff
+# set $new                 #b5cdff
+set $new                 #dd00d7
 
 # #                       border              	background      text                	indicator  	child border 
 client.focused            $new     		#778899FF      	#778899FF           	#778899FF	$new
@@ -286,9 +289,11 @@ client.urgent             #778899FF             $bg-color       $text-color     
 
 # Spawning programs on different workspaces
 for_window [class="qutebrowser"] move to workspace $ws1
-for_window [class="pcmanfm"] move to workspace $ws5
+for_window [class="Pcmanfm"] move to workspace $ws5
 for_window [class="Firefox"] move to workspace $ws1
-# for_window [class="libreoffice"] move to workspace $ws5
+for_window [class="libreoffice-startcenter"] move to workspace $ws4
+for_window [class="libreoffice-writer"] move to workspace $ws4
+for_window [class="libreoffice-calc"] move to workspace $ws4
 # for_window [class="Google-chrome"] move to workspace $ws4
 # for_window [class="Nautilus"] move to workspace $ws5
 

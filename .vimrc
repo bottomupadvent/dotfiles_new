@@ -83,6 +83,9 @@ set winheight=30
 " Python Specific
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 
+" Remove trailing whitespaces
+autocmd BufWritePre *.py :%s/\s\+$//e
+
 " Disable automatic commenting lines after <return>
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 

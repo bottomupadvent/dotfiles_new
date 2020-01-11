@@ -182,6 +182,7 @@ se(){
 
 # aliases
 
+alias sv="sudo vim"
 alias grep="grep --color=auto"
 alias ls="ls --group-directories-first --color "
 alias la="ls -a --group-directories-first --color "
