@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/home/sols/.emacs.d/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/sols/.oh-my-zsh"
@@ -19,7 +19,7 @@ antigen use oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="af-magic"
+ZSH_THEME="sorin"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -101,12 +101,14 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+antigen bundle mafredri/zsh-async
 antigen bundle git
 antigen bundle desyncr/auto-ls
 antigen apply
 
 # Enable colors and change prompt:
 source $ZSH/oh-my-zsh.sh
+source ~/.bash_profile
 
 # History in cache directory:
 HISTSIZE=10000
@@ -166,7 +168,11 @@ bindkey -v '^?' backward-delete-char
 shell_to_gui_fm () {
     bash /home/sols/.scripts/shell_scripts/pcman_tmux.sh
 }
-bindkey -s '^o' 'shell_to_gui_fm\n'
+
+ts() {
+    args=$@
+    tmux send-keys -t right "$args" C-m
+}
 
 ch(){ 
 	curl cheat.sh/"$1"
@@ -203,6 +209,8 @@ export FZF_ALT_C_COMMAND="fd -H -t d . /"
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 # Tree command to show the enteries of the directory
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+export BROWSER=firefox
+
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
@@ -214,4 +222,3 @@ source /usr/share/fzf/completion.zsh
 
 # syntax highlighting should be the last plugin to take effect
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-

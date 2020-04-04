@@ -1,16 +1,20 @@
 [Added Associations]
 application/pdf=mupdf.desktop;
+application/vnd.oasis.opendocument.spreadsheet=libreoffice-calc.desktop;
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop;
 image/jpeg=nomacs.desktop;org.kde.gwenview.desktop;userapp-feh -m-6DT49Z.desktop;userapp-feh -.-BANFA0.desktop;userapp-feh -Z-S8XIA0.desktop;userapp-feh -Z-8YA79Z.desktop;
+image/png=nomacs.desktop;org.kde.gwenview.desktop;
 inode/chardevice=pcmanfm.desktop;
 inode/directory=pcmanfm.desktop;
-image/png=nomacs.desktop;org.kde.gwenview.desktop;
 
 [Default Applications]
 application/msword=libreoffice-writer.desktop
 application/odt=libreoffice-writer.desktop
 application/pdf=mupdf.desktop
+application/vnd.oasis.opendocument.spreadsheet=libreoffice-calc.desktop;
 application/vnd.oasis.opendocument.text=libreoffice-writer.desktop
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
 image/jpeg=nomacs.desktop
-inode/directory=pcmanfm.desktop;
 image/png=nomacs.desktop
+inode/directory=pcmanfm.desktop;
