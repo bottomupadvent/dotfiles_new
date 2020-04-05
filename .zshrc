@@ -1,23 +1,20 @@
-# ++++++++++++++++++++ EXPORTS +++++++++++++++++++++ #
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/home/sols/.emacs.d/bin:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
-export LANG=en_US.UTF-8
-# Path to your oh-my-zsh installation.
-export ZSH="/home/sols/.oh-my-zsh"
-export FZF_DEFAULT_COMMAND='ag --hidden -p ~/.ag_zsh_ignore --ignore .git -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -H -t d . /"
-# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-# Tree command to show the enteries of the directory
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-export KEYTIMEOUT=1
-export BROWSER=firefox
-
+# ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias sv="sudo vim"
+alias vim="nvim"
+alias grep="grep --color=auto"
+alias ls="ls --group-directories-first --color "
+alias la="ls -a --group-directories-first --color "
+alias ll="ls -al--group-directories-first --color "
+alias p="sudo pacman"
+alias l="less"
+alias tree="tree -C"
+alias pg="ping google.com"
+alias sz="source ~/.zshrc"
+alias config='/usr/bin/git --git-dir=/home/sols/.cfg/ --work-tree=/home/sols'
 
 # ++++++++++++++++++++++ VARIABLES +++++++++++++++++++++ #
 # plugins=(git)
+MANPATH='/usr/share/man'
 ZSH_THEME="sorin"
 CASE_SENSITIVE="true"
 HYPHEN_INSENSITIVE="true"
@@ -37,23 +34,24 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
+# ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
+# open directory in pcmanfm from terminal
+shell_to_gui_fm () { bash /home/sols/.scripts/shell_scripts/pcman_tmux.sh }
+# sendkeys to right pane in tmux
+ts() { args=$@ ; tmux send-keys -t right "$args" C-m }
+# Cheat sheet for all packages
+ch(){ curl cheat.sh/"$1" }
+# Search for packages and highlight package name
+se(){ pacman -Ss "$1" | grep -B 1 '^.*/.*\s[0-9]\..*' }
+# fh - repeat history
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
+}
 
-# +++++++++++++++++++ SOURCING and PLUGINS +++++++++++++++++++++ #
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-source ~/antigen.zsh
-# Enable colors and change prompt:
-source $ZSH/oh-my-zsh.sh
-source ~/.bash_profile
-antigen use oh-my-zsh
-antigen bundle mafredri/zsh-async
-antigen bundle git
-antigen bundle desyncr/auto-ls
-antigen apply
+
 
 
 # +++++++++++++++ BIND KEY ++++++++++++++ #
-bindkey -v
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
@@ -65,31 +63,38 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
 
-# ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
-# open directory in pcmanfm from terminal
-shell_to_gui_fm () { bash /home/sols/.scripts/shell_scripts/pcman_tmux.sh }
-# sendkeys to right pane in tmux
-ts() { args=$@ ; tmux send-keys -t right "$args" C-m }
-# Cheat sheet for all packages
-ch(){ curl cheat.sh/"$1" }
-# Search for packages and highlight package name
-se(){ pacman -Ss "$1" | grep -B 1 '^.*/.*\s[0-9]\..*' }
+# ++++++++++++++++++++ EXPORTS +++++++++++++++++++++ #
+# If you come from bash you might have to change your $PATH.
+export ZSH="/home/sols/.oh-my-zsh"
+export PATH=$HOME/bin:/usr/local/bin:/home/sols/.emacs.d/bin:$PATH
+# export MANPATH="/usr/local/man:$MANPATH"
+export LANG=en_US.UTF-8
+# Path to your oh-my-zsh installation.
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info' 
+export FZF_DEFAULT_COMMAND='ag --hidden -p ~/.agignore --ignore .git -g ""'
+# Tree command to show the enteries of the directory
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -H -t d . /"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+export KEYTIMEOUT=1
+export BROWSER=firefox
+
+# +++++++++++++++++++ SOURCING and PLUGINS +++++++++++++++++++++ #
+# Enable colors and change prompt:
+source $ZSH/oh-my-zsh.sh
+source ~/.bash_profile
+source ~/antigen.zsh
+antigen use oh-my-zsh
+antigen bundle mafredri/zsh-async
+antigen bundle git
+antigen bundle desyncr/auto-ls
+antigen apply
 
 
-# ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
-alias sv="sudo vim"
-alias vim="nvim"
-alias grep="grep --color=auto"
-alias ls="ls --group-directories-first --color "
-alias la="ls -a --group-directories-first --color "
-alias ll="ls -al--group-directories-first --color "
-alias p="sudo pacman"
-alias l="less"
-alias tree="tree -C"
-alias pg="ping google.com"
-alias sz="source ~/.zshrc"
-alias config='/usr/bin/git --git-dir=/home/sols/.cfg/ --work-tree=/home/sols'
-
-
+# Dont change the order of following lines
+bindkey -v  # Vim bindings in zsh (This should at the bottom to avoid overriding)
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 # syntax highlighting should be the last plugin to take effect
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

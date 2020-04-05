@@ -27,14 +27,20 @@ Plug 'tomtom/tcomment_vim'
 call plug#end()
 
 " "==========BASIC LET AND SET==========="
-let g:auto_save = 1  	    " enable AutoSave plugin on Vim startup
+let g:auto_save = 0  	    " enable AutoSave plugin on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
 set termguicolors           " Enable GUI colors for the terminal to get truecolor
 let base16colorspace=256    " Access colors present in 256 colorspace
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 set relativenumber
+set guicursor=
+" Doesn't show INSERT,NORMAL,VISUAL (It slows neovim)
+set noshowmode
+" Following 2 reduces speed if set
+set noshowcmd
+set noruler
 set number
 set splitright
 set splitbelow
@@ -45,11 +51,6 @@ set ignorecase
 set noswapfile
 " Undo file even after reopen
 set undofile
-" Following 2 options : Enter/O/o doesn't created commented line when on
-" commented line
-
-set formatoptions-=r
-set formatoptions-=o
 " dynamic current window sizing from TBot Art of Vim
 " set winwidth=95
 " set winheight=30
@@ -57,15 +58,19 @@ set formatoptions-=o
 " " ===========DEOPLETE and JEDI============= "
 " Enter key on commented line doesn't create another commented line
 " autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-" disable autocompletion, cause we use deoplete for completion
+" disable autocompletion for jedi-vim cause we use deoplete for completion
 let g:jedi#completions_enabled = 0
-" open the go-to function in split, not another buffer
+let g:jedi#goto_assignments_command = "<leader>a"
+let g:jedi#goto_definitions_command = "<leader>d"
+let g:jedi#goto_stubs_command = "<leader>c"
 let g:jedi#use_splits_not_buffers = "right"
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 0
 let g:python3_host_prog = '/usr/bin/python'  " python interpreter for deoplete-jedi
 
 " " ========= AUTOCOMMANDS ========== "
+" Following 2 options : Enter/O/o doesn't created commented line when on commented line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Remembers the cursor position in file even after quiting it
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -84,10 +89,15 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " Save files when not opened with sudo
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-" Remapping :wq :q and :q!
+" Remapping :w :wq :q and :q!
 nnoremap <leader>; :q!<cr>
 nnoremap <leader>q :q<cr>
+nnoremap <leader>s :w<cr>
 nnoremap <leader>wq :wq<CR>
+" jump between marks
+nnoremap <M-n> :normal ]' <cr>
+nnoremap <M-p> :normal [' <cr>
+
 " Remove word highlighting
 map <esc> :noh<cr>
 " Switch between the last two files
@@ -96,6 +106,7 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 nnoremap <localleader>e :call Send_keys() <CR><CR>
+
 
 " " ========= FUNCTIONS =========== "
 " send-keys to tmux pane
@@ -134,8 +145,23 @@ nmap <leader>l :Lines<cr>
 " Search content in the current file and in files under the current directory
 nmap <leader>g :Ag<cr>
 
+
 " " ======= COLORS ======== "
 colorscheme base16-material-darker
 let g:lightline = {
       \ 'colorscheme': 'nord',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename' , 'buffernumber', 'modified' ] ],
+      \ 
+      \   'right': [ [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \},
+      \   'component_function': {
+      \         'buffernumber': 'Bufno'
+      \ },
       \ }
+
+" Buffer number in lightline
+function! Bufno()
+  return winwidth(0) > 70 ? bufnr('%') : ''
+endfunction
