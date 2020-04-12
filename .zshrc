@@ -47,8 +47,9 @@ _comp_options+=(globdots)		# Include hidden files.
 # ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
 # Git commit since alias dont take arguments
 ce() {
+    msg="$@"
     config add -u
-    config commit -m "\"$@\""
+    config commit -m "$msg"
     # config push origin master
 }
 # Open files from anywhere
