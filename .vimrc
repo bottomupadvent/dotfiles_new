@@ -1,7 +1,11 @@
 " ============VimPlug (Plugin Manager)============ "
 call plug#begin()
 Plug '907th/vim-auto-save'
+Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
+Plug 'Yggdroot/indentLine'
+" Supertab is needed for Ultisnips and deoplete to work well together
+Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 " deoplete provides async autocompletions
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -26,21 +30,21 @@ Plug 'tomtom/tcomment_vim'
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 call plug#end()
 
+
 " "==========BASIC LET AND SET==========="
 let g:auto_save = 0  	    " enable AutoSave plugin on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
 set termguicolors           " Enable GUI colors for the terminal to get truecolor
+set background=dark
 let base16colorspace=256    " Access colors present in 256 colorspace
-set clipboard=unnamedplus
+set hidden  " Change buffers without saving a buffer
+set clipboard+=unnamedplus " Neovim requires xsel to be installed for foll to work
 set relativenumber
-set guicursor=
-" Doesn't show INSERT,NORMAL,VISUAL (It slows neovim)
-set noshowmode
-" Following 2 reduces speed if set
-set noshowcmd
-set noruler
+set guicursor=  " Keep cursor constant in INSERT, NORMAL mode
+set noshowmode " Doesn't show INSERT,NORMAL,VISUAL (It slows neovim)
+set noshowcmd noruler   " Reduces speed if set
 set number
 set splitright
 set splitbelow
@@ -49,17 +53,21 @@ set tabstop=4
 set shiftwidth=4
 set ignorecase
 set noswapfile
-" Undo file even after reopen
-set undofile
+set undofile " Undo file even after reopen
+let g:indentLine_char = '┊'
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let mapleader = " "
+let maplocalleader = ","
 " dynamic current window sizing from TBot Art of Vim
-" set winwidth=95
-" set winheight=30
+set winwidth=85
+set winheight=20
+
 
 " " ===========DEOPLETE and JEDI============= "
-" Enter key on commented line doesn't create another commented line
-" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-" disable autocompletion for jedi-vim cause we use deoplete for completion
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 0 " disable autocomplete for jedi-vim cause we use deoplete for completion
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#show_call_signatures = "0"
+let g:jedi#documentation_command = "D"
 let g:jedi#goto_assignments_command = "<leader>a"
 let g:jedi#goto_definitions_command = "<leader>d"
 let g:jedi#goto_stubs_command = "<leader>c"
@@ -68,8 +76,9 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 0
 let g:python3_host_prog = '/usr/bin/python'  " python interpreter for deoplete-jedi
 
+
 " " ========= AUTOCOMMANDS ========== "
-" Following 2 options : Enter/O/o doesn't created commented line when on commented line
+" Enter/O/o doesn't created commented line when on commented line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Remembers the cursor position in file even after quiting it
 if has("autocmd")
@@ -80,24 +89,27 @@ au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab sm
 " Remove trailing whitespaces
 autocmd BufWritePre *.py :%s/\s\+$//e
 
+
 " " ========== REMAPS ========= "
-" Leader and Local-leader
-let mapleader = " "
-let maplocalleader = ","
+nnoremap H ^
+nnoremap L $
+" Following 1 line Just keep it
+vnoremap K k
+nnoremap <silent>u :silent undo<cr>
+nnoremap <silent><C-r> :silent redo<cr>
 " Sourcing .vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <silent><leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <silent><leader>sv :source $MYVIMRC<cr>
 " Save files when not opened with sudo
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " Remapping :w :wq :q and :q!
-nnoremap <leader>; :q!<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>s :w<cr>
+nnoremap <silent><leader>; :q!<cr>
+nnoremap <silent><leader>q :q<cr>
+nnoremap <silent><leader>s :silent w<cr>
 nnoremap <leader>wq :wq<CR>
 " jump between marks
-nnoremap <M-n> :normal ]' <cr>
-nnoremap <M-p> :normal [' <cr>
-
+nnoremap <C-n> :normal ]'zz <cr>
+nnoremap <C-p> :normal ['zz <cr>
 " Remove word highlighting
 map <esc> :noh<cr>
 " Switch between the last two files
@@ -106,6 +118,10 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 nnoremap <localleader>e :call Send_keys() <CR><CR>
+" Search current buffer with fzf instead of normal vim search
+nnoremap / :BLines<CR>
+nnoremap <C-o> <C-o>zz 
+nnoremap <C-i> <C-i>zz 
 
 
 " " ========= FUNCTIONS =========== "
@@ -116,10 +132,16 @@ function! Send_keys()
     " % gives filename of the current buffer
     execute '!ts python3 % \< '.input_file
 endfunction
+" Buffer number in lightline
+function! Bufno()
+    return winwidth(0) > 70 ? bufnr('%') : ''
+endfunction
+
 
 " " ============ EASY MOTION =============== "
 map <localleader> <Plug>(easymotion-prefix)
 let g:EasyMotion_smartcase = 1
+
 
 " " ============ ULTISNIPS ================ "
 map <F7> :UltiSnipsEdit<CR>
@@ -129,25 +151,26 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
+
 " " =========== FZF ============ "
+" command history
+" nmap <leader>
 " Search in hidden dir
-let $FZF_DEFAULT_COMMAND = 'ag --hidden -p ~/.agignore --ignore .git -l -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -p ~/.gitignore --ignore .git -l -g ""'
 " Search and switch buffers
-nmap <leader>b :Buffers<cr>
-" Find files by name under the current directory
-nmap <leader>f :Files<cr>
+nmap <leader>b :Buffers <cr>
 " Find files by name under the home directory
 nmap <leader>h :Files ~/<cr>
-" Find files from root dir recursively
-nmap <leader>r :Files /<cr>
-" Search content in the current file
-nmap <leader>l :Lines<cr>
+" Search content in loaded buffers
+nmap <leader>l :Lines <cr>
 " Search content in the current file and in files under the current directory
-nmap <leader>g :Ag<cr>
+nmap <leader>g :Ag <cr>
+" Search through command history
+nmap <leader>c :History: <cr>
 
 
 " " ======= COLORS ======== "
-colorscheme base16-material-darker
+colorscheme base16-dracula
 let g:lightline = {
       \ 'colorscheme': 'nord',
       \ 'active': {
@@ -160,8 +183,3 @@ let g:lightline = {
       \         'buffernumber': 'Bufno'
       \ },
       \ }
-
-" Buffer number in lightline
-function! Bufno()
-  return winwidth(0) > 70 ? bufnr('%') : ''
-endfunction
