@@ -50,7 +50,7 @@ ce() {
     msg="$@"
     config add -u
     config commit -m "$msg"
-    # config push origin master
+    config push origin master
 }
 # Open files from anywhere
 f() {
