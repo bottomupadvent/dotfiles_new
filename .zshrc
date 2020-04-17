@@ -3,7 +3,7 @@
 AUTO_LS_COMMANDS=(custom_function)
 AUTO_LS_NEWLINE=false
 MANPATH='/usr/share/man'
-ZSH_THEME="pure"
+ZSH_THEME="af-magic"
 CASE_SENSITIVE="true"
 HYPHEN_INSENSITIVE="true"
 # Uncomment the following line if pasting URLs and other text is messed up.
