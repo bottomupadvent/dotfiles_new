@@ -1,16 +1,17 @@
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias hibernate="sudo systemctl hibernate"
+alias sleep="sudo systemctl suspend"
+alias m="man"
+alias xo="xdg-open"
 alias tk="tmux kill-server"
 alias am="free -h | awk -F \" \" '{print \$4}' | sed 's/shared/ /' ; echo"
 alias td="tmux detach"
 alias ta="tmux attach"
-alias ap="apropos"
 alias sv="sudo nvim"
 alias vim="nvim"
 alias grep="grep --color=auto"
-alias ls="ls --group-directories-first --color "
-alias la="ls -a --group-directories-first --color "
-alias ll="ls -al--group-directories-first --color "
-alias lsf="ls -t | head -n 20"
+alias ls="ls --group-directories-first -X --color"
+alias lsf="ls -t --color | head -n 20"
 alias p="sudo pacman"
 alias l="less"
 alias tree="tree -C"
@@ -18,11 +19,11 @@ alias pg="ping google.com"
 alias sz="source ~/.zshrc"
 alias config='/usr/bin/git --git-dir=/home/sols/.cfg/ --work-tree=/home/sols'
 alias cs="config status"
-alias ca="config add -u"
-alias cp="config push origin master"
+
 
 # ++++++++++++++++++++++ VARIABLES +++++++++++++++++++++ #
 # plugins=(git)
+AUTO_LS_COMMANDS=(custom_function)
 MANPATH='/usr/share/man'
 ZSH_THEME="sorin"
 CASE_SENSITIVE="true"
@@ -45,7 +46,13 @@ _comp_options+=(globdots)		# Include hidden files.
 
 
 # ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
-# Git commit since alias dont take arguments
+auto-ls-custom_function () {
+    ls --group-directories-first -X --color 
+}
+ap() {
+    apropos -s 1 $@ | less
+}
+# Commit .dotfiles to git in one function
 ce() {
     msg="$@"
     config add -u

@@ -1,5 +1,7 @@
 " ============VimPlug (Plugin Manager)============ "
 call plug#begin()
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug '907th/vim-auto-save'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
@@ -91,6 +93,9 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 
 
 " " ========== REMAPS ========= "
+" center after various jumps "zz"
+nnoremap g; g;zz
+nnoremap g, g,zz
 nnoremap H ^
 nnoremap L $
 " Following 1 line Just keep it
