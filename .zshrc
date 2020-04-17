@@ -1,31 +1,9 @@
-# ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
-alias hibernate="sudo systemctl hibernate"
-alias sleep="sudo systemctl suspend"
-alias m="man"
-alias xo="xdg-open"
-alias tk="tmux kill-server"
-alias am="free -h | awk -F \" \" '{print \$4}' | sed 's/shared/ /' ; echo"
-alias td="tmux detach"
-alias ta="tmux attach"
-alias sv="sudo nvim"
-alias vim="nvim"
-alias grep="grep --color=auto"
-alias ls="ls --group-directories-first -X --color"
-alias lsf="ls -t --color | head -n 20"
-alias p="sudo pacman"
-alias l="less"
-alias tree="tree -C"
-alias pg="ping google.com"
-alias sz="source ~/.zshrc"
-alias config='/usr/bin/git --git-dir=/home/sols/.cfg/ --work-tree=/home/sols'
-alias cs="config status"
-
-
 # ++++++++++++++++++++++ VARIABLES +++++++++++++++++++++ #
 # plugins=(git)
 AUTO_LS_COMMANDS=(custom_function)
+AUTO_LS_NEWLINE=false
 MANPATH='/usr/share/man'
-ZSH_THEME="sorin"
+ZSH_THEME="pure"
 CASE_SENSITIVE="true"
 HYPHEN_INSENSITIVE="true"
 # Uncomment the following line if pasting URLs and other text is messed up.
@@ -79,7 +57,6 @@ ch(){ curl cheat.sh/"$1" }
 se(){ pacman -Ss "$1" | grep -B 1 '^.*/.*\s[0-9]\..*' }
 
 
-
 # +++++++++++++++ BIND KEY ++++++++++++++ #
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
@@ -115,6 +92,7 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
+
 # +++++++++++++++++++ SOURCING and PLUGINS +++++++++++++++++++++ #
 # Enable colors and change prompt:
 source $ZSH/oh-my-zsh.sh
@@ -122,9 +100,35 @@ source ~/.bash_profile
 source ~/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
 antigen bundle git
 antigen bundle desyncr/auto-ls
 antigen apply
+
+
+# ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias hibernate="sudo systemctl hibernate"
+alias sleep="sudo systemctl suspend"
+alias m="man"
+alias xo="xdg-open"
+alias tk="tmux kill-server"
+alias am="free -h | awk -F \" \" '{print \$4}' | sed 's/shared/ /' ; echo"
+alias td="tmux detach"
+alias ta="tmux attach"
+alias sv="sudo nvim"
+alias vim="nvim"
+alias grep="grep --color=auto"
+alias lsf="ls -t --color | head -n 20"
+alias p="sudo pacman"
+alias l="less"
+alias tree="tree -C"
+alias pg="ping google.com"
+alias sz="source ~/.zshrc"
+alias config='/usr/bin/git --git-dir=/home/sols/.cfg/ --work-tree=/home/sols'
+alias cs="config status"
+alias ls="ls --group-directories-first -X --color"
+alias ll="ls -lha --group-directories-first -X --color"
+alias la="ls -a --group-directories-first -X --color"
 
 
 # Dont change the order of following lines
