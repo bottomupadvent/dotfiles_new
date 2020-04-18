@@ -24,6 +24,13 @@ _comp_options+=(globdots)		# Include hidden files.
 
 
 # ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
+ppdf() { 
+    pandoc "$1" \
+    -V linkcolor:blue \
+    -V geometry:a4paper \
+    -V geometry:margin=2cm \
+    -o "$2"
+}
 auto-ls-custom_function () {
     ls --group-directories-first -X --color 
 }
@@ -100,7 +107,6 @@ source ~/.bash_profile
 source ~/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
 antigen bundle git
 antigen bundle desyncr/auto-ls
 antigen apply

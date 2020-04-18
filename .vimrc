@@ -1,7 +1,7 @@
 " ============VimPlug (Plugin Manager)============ "
 call plug#begin()
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'vimwiki/vimwiki'
 Plug '907th/vim-auto-save'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
@@ -77,6 +77,8 @@ let g:jedi#use_splits_not_buffers = "right"
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 0
 let g:python3_host_prog = '/usr/bin/python'  " python interpreter for deoplete-jedi
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 
 " " ========= AUTOCOMMANDS ========== "
