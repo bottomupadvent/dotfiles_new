@@ -28,7 +28,7 @@ fdcdh() {
   local dir
   dir=$(
     cd && fd -0 --type d --hidden | fzf --read0
-  ) && cd ~/$dir || return
+  ) && [ $dir != '' ] && cd ~/$dir || echo $'\\n'
   if zle; then
     # allow fdcd to run inside and outside zle
     zle reset-prompt
@@ -41,7 +41,7 @@ fdcdv() {
   local dir
   dir=$(
     cd /media/Volume && fd -0 -I --type d --hidden | fzf --read0
-  ) && cd /media/Volume/$dir || return
+  ) && [ $dir != '' ] && cd /media/Volume/$dir || echo $'\\n'
   if zle; then
     # allow fdcd to run inside and outside zle
     zle reset-prompt
@@ -92,6 +92,8 @@ se(){ pacman -Ss "$1" | grep -B 1 '^.*/.*\s[0-9]\..*' }
 # +++++++++++++++ BIND KEY ++++++++++++++ #
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
+zle -N shell_to_gui_fm
+bindkey '\ef' shell_to_gui_fm
 bindkey '^e' edit-command-line
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
@@ -133,6 +135,8 @@ antigen bundle mafredri/zsh-async
 antigen bundle git
 # antigen bundle desyncr/auto-ls
 antigen apply
+
+
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
 alias gpom='git push origin master'
