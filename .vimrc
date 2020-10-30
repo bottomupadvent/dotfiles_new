@@ -9,6 +9,7 @@ Plug 'Yggdroot/indentLine'
 " Supertab is needed for Ultisnips and deoplete to work well together
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
+Plug 'calviken/vim-gdscript3'
 " deoplete provides async autocompletions
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " deoplete-jedi is specific for async python autocompletions
@@ -98,8 +99,6 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 " center after various jumps "zz"
 nnoremap g; g;zz
 nnoremap g, g,zz
-nnoremap H ^
-nnoremap L $
 " Following 1 line Just keep it
 vnoremap K k
 nnoremap <silent>u :silent undo<cr>
@@ -125,8 +124,6 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 nnoremap <localleader>e :call Send_keys() <CR><CR>
-" Search current buffer with fzf instead of normal vim search
-nnoremap / :BLines<CR>
 nnoremap <C-o> <C-o>zz 
 nnoremap <C-i> <C-i>zz 
 
@@ -168,6 +165,8 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden -p ~/.gitignore --ignore .git -l -g ""'
 nmap <leader>b :Buffers <cr>
 " Find files by name under the home directory
 nmap <leader>h :Files ~/<cr>
+" Files under current directory
+nmap <leader>f :Files .<cr>
 " Search content in loaded buffers
 nmap <leader>l :Lines <cr>
 " Search content in the current file and in files under the current directory

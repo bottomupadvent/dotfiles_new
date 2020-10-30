@@ -18,3 +18,4 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoff
 image/jpeg=nomacs.desktop
 image/png=nomacs.desktop
 inode/directory=pcmanfm.desktop;
+text/html=org.qutebrowser.qutebrowser.desktop

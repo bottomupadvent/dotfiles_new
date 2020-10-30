@@ -1,7 +1,7 @@
-# ++++++++++++++++++++++ VARIABLES +++++++++++++++++++++ #
+#/ ++++++++++++++++++++++ VARIABLES +++++++++++++++++++++ #
 # plugins=(git)
-AUTO_LS_COMMANDS=(custom_function)
-AUTO_LS_NEWLINE=false
+# AUTO_LS_COMMANDS=(custom_function)
+# AUTO_LS_NEWLINE=false
 MANPATH='/usr/share/man'
 ZSH_THEME="af-magic"
 CASE_SENSITIVE="true"
@@ -21,9 +21,35 @@ zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
-
+eval "$(fasd --init auto)"
 
 # ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
+fdcdh() {
+  local dir
+  dir=$(
+    cd && fd -0 --type d --hidden | fzf --read0
+  ) && cd ~/$dir || return
+  if zle; then
+    # allow fdcd to run inside and outside zle
+    zle reset-prompt
+  fi
+}
+zle -N fdcdh
+bindkey '\eh' fdcdh
+
+fdcdv() {
+  local dir
+  dir=$(
+    cd /media/Volume && fd -0 -I --type d --hidden | fzf --read0
+  ) && cd /media/Volume/$dir || return
+  if zle; then
+    # allow fdcd to run inside and outside zle
+    zle reset-prompt
+  fi
+}
+zle -N fdcdv
+bindkey '\ev' fdcdv
+
 ppdf() { 
     pandoc "$1" \
     -V linkcolor:blue \
@@ -45,7 +71,7 @@ ce() {
     config push origin master
 }
 # Open files from anywhere
-f() {
+op() {
   local files
   files=(${(f)"$(locate --regex -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1 -m)"})
   if [[ -n $files ]]
@@ -63,7 +89,6 @@ ch(){ curl cheat.sh/"$1" }
 # Search for packages and highlight package name
 se(){ pacman -Ss "$1" | grep -B 1 '^.*/.*\s[0-9]\..*' }
 
-
 # +++++++++++++++ BIND KEY ++++++++++++++ #
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
@@ -75,11 +100,10 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
-
 # ++++++++++++++++++++ EXPORTS +++++++++++++++++++++ #
 # If you come from bash you might have to change your $PATH.
 export ZSH="/home/sols/.oh-my-zsh"
-export PATH=$HOME/bin:/usr/local/bin:/home/sols/.emacs.d/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/home/sols/.emacs.d/bin:/home/sols/Downloads/Piskel-0.14.0-64bits:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info' 
@@ -99,7 +123,6 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-
 # +++++++++++++++++++ SOURCING and PLUGINS +++++++++++++++++++++ #
 # Enable colors and change prompt:
 source $ZSH/oh-my-zsh.sh
@@ -108,11 +131,19 @@ source ~/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle mafredri/zsh-async
 antigen bundle git
-antigen bundle desyncr/auto-ls
+# antigen bundle desyncr/auto-ls
 antigen apply
 
-
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias gpom='git push origin master'
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias zz='fasd_cd -d -i' # cd with interactive selection
+alias xo="xdg-open "
 alias hibernate="sudo systemctl hibernate"
 alias sleep="sudo systemctl suspend"
 alias m="man"
@@ -135,7 +166,6 @@ alias cs="config status"
 alias ls="ls --group-directories-first -X --color"
 alias ll="ls -lha --group-directories-first -X --color"
 alias la="ls -a --group-directories-first -X --color"
-
 
 # Dont change the order of following lines
 bindkey -v  # Vim bindings in zsh (This should at the bottom to avoid overriding)
