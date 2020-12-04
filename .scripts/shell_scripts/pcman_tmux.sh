@@ -3,4 +3,4 @@
 var=$(pwd)
 dolphin "$var" 2> /dev/null &
 disown
-xdotool key alt+2
+xdotool key alt+2 &
