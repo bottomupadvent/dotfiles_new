@@ -1,4 +1,27 @@
+*.db
+*.capx
+*.doc
+*.JPG
+*.vox
+*.obj
+*.mtl
+*.zip
+*.exe
+*.dll
+*.tiff
+*.ttf
+*.ogg
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.docx
+*.xlsx
+*.xls
+*.odt
+*.ods
 /home/sols/College/
+/home/sols/godot/
 /home/sols/Desktop/
 /home/sols/logs/
 /home/sols/snap/
@@ -12,7 +35,8 @@
 /home/sols/.scripts/web/
 /home/sols/.vim/
 /home/sols/.local/
-/home/sols/.antigen
+/home/sols/.antigen*/*
+/home/sols/.Androi*/*
 /home/sols/.config/nvim/plugged/
 /home/sols/.tmux/plugins/
 /home/sols/Source/
@@ -51,25 +75,25 @@
 /usr/lib32/
 /usr/man/
 /usr/include/
-/usr/sbin
-/usr/lib64
-/usr/lib32
-/usr/src
-/usr/bin
-/media/Volume/'$RECYCLE.BIN'
-/media/Volume/16-GB-Backup
-/media/Volume/29-11-2018
-/media/Volume/All_jehangir_sculp
-/media/Volume/'Compressed\ Images'
-/media/Volume/delete_it
-/media/Volume/deleteit_please
-/media/Volume/didiji_temp
-/media/Volume/Downloads
-/media/Volume/Gandhali_Anka
-/media/Volume/Moto_g3_baba
-/media/Volume/msdownld.tmp
-/media/Volume/proj
-/media/Volume/Rarely_Opened
-/media/Volume/'System\ Volume\ Information'
-/media/Volume/temp
-/media/Volume/'Useless\ Crap'
+/usr/sbin/
+/usr/lib64/
+/usr/lib32/
+/usr/src/
+/usr/bin/
+/media/Volume/'$RECYCLE.BIN'/
+/media/Volume/16-GB-Backup/
+/media/Volume/29-11-2018/
+/media/Volume/All_jehangir_sculp/
+/media/Volume/'Compressed\ Images'/
+/media/Volume/delete_it/
+/media/Volume/deleteit_please/
+/media/Volume/didiji_temp/
+/media/Volume/Downloads/
+/media/Volume/Gandhali_Anka/
+/media/Volume/Moto_g3_baba/
+/media/Volume/msdownld.tmp/
+/media/Volume/proj/
+/media/Volume/Rarely_Opened/
+/media/Volume/'System\ Volume\ Information'/
+/media/Volume/temp/
+/media/Volume/'Useless\ Crap'/

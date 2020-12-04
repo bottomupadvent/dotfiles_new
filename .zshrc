@@ -61,10 +61,9 @@ ce() {
 op() {
   local files
   files=(${(f)"$(locate --regex -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1 -m)"})
-  if [[ -n $files ]]
+  if [[ -f $files ]]
   then
-     vim -- $files
-     print -l $files[1]
+     xo $files
   fi
 }
 # open directory in pcmanfm from terminal
@@ -128,7 +127,7 @@ alias la="ls -a --group-directories-first -X --color"
 # +++++++++++++++++++ SOURCING and PLUGINS +++++++++++++++++++++ #
 # Enable colors and change prompt:
 source $ZSH/oh-my-zsh.sh
-source ~/.bash_profile
+source ~/.zshenv
 source ~/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle mafredri/zsh-async
