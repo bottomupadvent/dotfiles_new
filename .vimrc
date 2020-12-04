@@ -3,7 +3,6 @@ call plug#begin()
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
 Plug '907th/vim-auto-save'
-Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'Yggdroot/indentLine'
 " Supertab is needed for Ultisnips and deoplete to work well together
@@ -70,7 +69,7 @@ set winheight=20
 let g:jedi#completions_enabled = 0 " disable autocomplete for jedi-vim cause we use deoplete for completion
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#show_call_signatures = "0"
-let g:jedi#documentation_command = "D"
+" let g:jedi#documentation_command = "D"
 let g:jedi#goto_assignments_command = "<leader>a"
 let g:jedi#goto_definitions_command = "<leader>d"
 let g:jedi#goto_stubs_command = "<leader>c"
@@ -176,9 +175,8 @@ nmap <leader>c :History: <cr>
 
 
 " " ======= COLORS ======== "
-colorscheme base16-dracula
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'Tomorrow_Night_Bright',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename' , 'buffernumber', 'modified' ] ],
@@ -189,3 +187,4 @@ let g:lightline = {
       \         'buffernumber': 'Bufno'
       \ },
       \ }
+colorscheme base16-atelier-plateau-light
