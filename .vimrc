@@ -1,5 +1,6 @@
 " ============VimPlug (Plugin Manager)============ "
 call plug#begin()
+Plug 'preservim/nerdtree'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
 Plug '907th/vim-auto-save'
@@ -8,7 +9,6 @@ Plug 'Yggdroot/indentLine'
 " Supertab is needed for Ultisnips and deoplete to work well together
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
-Plug 'calviken/vim-gdscript3'
 " deoplete provides async autocompletions
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " deoplete-jedi is specific for async python autocompletions
@@ -34,7 +34,8 @@ call plug#end()
 
 
 " "==========BASIC LET AND SET==========="
-let g:auto_save = 0  	    " enable AutoSave plugin on Vim startup
+let g:auto_save = 1  	    " enable AutoSave plugin on Vim startup
+let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_silent = 1  " do not display the auto-save notification
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
@@ -57,13 +58,13 @@ set ignorecase
 set noswapfile
 set undofile " Undo file even after reopen
 let g:indentLine_char = '┊'
+let g:indentLine_fileTypeExclude = ['vimwiki']
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let mapleader = " "
 let maplocalleader = ","
 " dynamic current window sizing from TBot Art of Vim
 set winwidth=85
 set winheight=20
-
 
 " " ===========DEOPLETE and JEDI============= "
 let g:jedi#completions_enabled = 0 " disable autocomplete for jedi-vim cause we use deoplete for completion
@@ -90,11 +91,52 @@ if has("autocmd")
 endif
 " Python Specific
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
+" function! Reload_mupdf()
+"     !sleep 3 && pkill -HUP mupdf
+" endfunction
+" " Run Reload_mupdf() after writing the buffer to file
+" au BufWritePost *.ms :call Reload_mupdf()
 " Remove trailing whitespaces
 autocmd BufWritePre *.py :%s/\s\+$//e
 
 
 " " ========== REMAPS ========= "
+" j and k work as expected even in long wrapped paragraphs
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+" execute current line as if a command. Better than q:
+nnoremap <localleader>q :exe getline(line('.'))<cr>
+" acts like dd but doesn't put anything in register
+nnoremap s "_d
+" codeblock in markdown
+function CodeBlock()
+    normal ohxi``````O 
+endfunction
+nnoremap <localleader>c :call CodeBlock()<CR>
+" make words Bolds/italic for markdown
+function! Bold(emphasis)
+    let count = input("count = ") 
+    if a:emphasis == "B"
+        if count == "$"
+            execute "normal ys$*."
+        else
+            execute "normal ys" . count . "W*."
+        endif
+    else 
+        if count == "$"
+            execute "normal ys$*.."
+        else
+            execute "normal ys" . count . "W*.."
+        endif
+    endif
+endfunction
+nnoremap <leader>w :call Bold("B")<CR>
+nnoremap <leader>e :call Bold("BI")<CR>
+" Indent newly added list item after pressing "o" markdown
+inoremap <localleader>l <Esc>>>A
+inoremap <localleader>h <Esc><<A
+" <BS> is backspace
+inoremap <localleader>a <BS><BS><CR>
 " center after various jumps "zz"
 nnoremap g; g;zz
 nnoremap g, g,zz
@@ -103,8 +145,8 @@ vnoremap K k
 nnoremap <silent>u :silent undo<cr>
 nnoremap <silent><C-r> :silent redo<cr>
 " Sourcing .vimrc
-nnoremap <silent><leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <silent><leader>sv :source $MYVIMRC<cr>
+nnoremap <silent><leader>ev :vsplit $MYVIMRC<cr>
 " Save files when not opened with sudo
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " Remapping :w :wq :q and :q!
@@ -125,6 +167,7 @@ nnoremap <leader>= :wincmd =<cr>
 nnoremap <localleader>e :call Send_keys() <CR><CR>
 nnoremap <C-o> <C-o>zz 
 nnoremap <C-i> <C-i>zz 
+nnoremap <leader>m :NERDTreeToggle<CR>
 
 
 " " ========= FUNCTIONS =========== "

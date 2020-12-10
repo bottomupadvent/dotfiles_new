@@ -2,9 +2,10 @@
 
 # If you come from bash you might have to change your $PATH.
 export ZSH="/home/sols/.oh-my-zsh"
-export PATH=$HOME/bin:/usr/local/bin:/home/sols/.emacs.d/bin:/home/sols/Downloads/Piskel-0.14.0-64bits:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/home/sols/.emacs.d/bin:/home/sols/Downloads/Piskel-0.14.0-64bits:/usr/lib/R/library/Rttf2pt1/exec/:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
+export GROFF_FONT_PATH="~/pandoc/groff_linux_book/fonts/groff_fonts"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info' 
 export FZF_DEFAULT_COMMAND='ag --depth 4 --hidden -p ~/.gitignore --ignore .git -g ""'
 # Tree command to show the enteries of the directory

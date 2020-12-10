@@ -90,6 +90,7 @@ bindkey -v '^?' backward-delete-char
 
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias mu="mupdf "
 alias gpom='git push origin master'
 alias a='fasd -a'        # any
 alias s='fasd -si'       # show / search / select
@@ -99,6 +100,7 @@ alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
 alias xo="xdg-open "
+alias smd="systemctl "
 alias hibernate="sudo systemctl hibernate"
 alias gn="sudo systemctl suspend"
 alias m="man"
