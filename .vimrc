@@ -117,13 +117,13 @@ nnoremap <localleader>c :call CodeBlock()<CR>
 function! Bold(emphasis)
     let count = input("count = ") 
     if a:emphasis == "B"
-        if count == "$"
+        if count == ""
             execute "normal ys$*."
         else
             execute "normal ys" . count . "W*."
         endif
     else 
-        if count == "$"
+        if count == ""
             execute "normal ys$*.."
         else
             execute "normal ys" . count . "W*.."
@@ -224,7 +224,7 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename' , 'buffernumber', 'modified' ] ],
       \ 
-      \   'right': [ [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   'right': [ [ 'percent', 'fileformat', 'fileencoding', 'filetype' ] ]
       \},
       \   'component_function': {
       \         'buffernumber': 'Bufno'

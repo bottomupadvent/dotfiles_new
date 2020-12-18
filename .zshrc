@@ -24,7 +24,7 @@ _comp_options+=(globdots)		# Include hidden files.
 eval "$(fasd --init auto)"
 
 # ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
-fdcdv() {
+cv() {
   local dir
   dir=$(
     cd /media/Volume && fd --ignore-file ~/.gitignore -0 -I --type d --hidden | fzf --read0
@@ -51,11 +51,19 @@ ap() {
     apropos -s 1 $@ | less
 }
 # Commit .dotfiles to git in one function
-ce() {
+gce() {
     msg="$@"
     config add -u
     config commit -m "$msg"
     config push origin master
+}
+# Vimwiki commit in one func
+gcv() {
+    msg="$@"
+    cd ~/vimwiki
+    git add -u
+    git commit -m "$msg"
+    git push origin master
 }
 # Open files from anywhere
 op() {
@@ -67,7 +75,7 @@ op() {
   fi
 }
 # open directory in pcmanfm from terminal
-shell_to_gui_fm () { bash /home/sols/.scripts/shell_scripts/pcman_tmux.sh }
+of() { bash /home/sols/.scripts/shell_scripts/pcman_tmux.sh }
 # sendkeys to right pane in tmux
 ts() { args=$@ ; tmux send-keys -t right "$args" C-m }
 # Cheat sheet for all packages
