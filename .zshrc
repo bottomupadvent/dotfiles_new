@@ -61,6 +61,7 @@ gce() {
 gcv() {
     msg="$@"
     cd ~/vimwiki
+    git pull origin master
     git add -u
     git commit -m "$msg"
     git push origin master
