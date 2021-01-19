@@ -2,8 +2,8 @@
 application/pdf=mupdf.desktop;
 application/vnd.oasis.opendocument.spreadsheet=libreoffice-calc.desktop;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop;
-image/jpeg=nomacs.desktop;org.kde.gwenview.desktop;userapp-feh -m-6DT49Z.desktop;userapp-feh -.-BANFA0.desktop;userapp-feh -Z-S8XIA0.desktop;userapp-feh -Z-8YA79Z.desktop;
-image/png=nomacs.desktop;org.kde.gwenview.desktop;
+image/jpeg=feh-3.desktop;nomacs.desktop;org.kde.gwenview.desktop;userapp-feh -m-6DT49Z.desktop;userapp-feh -.-BANFA0.desktop;userapp-feh -Z-S8XIA0.desktop;userapp-feh -Z-8YA79Z.desktop;
+image/png=feh-2.desktop;nomacs.desktop;org.kde.gwenview.desktop;
 inode/chardevice=pcmanfm.desktop;
 inode/directory=pcmanfm.desktop;
 
@@ -15,12 +15,11 @@ application/vnd.oasis.opendocument.spreadsheet=libreoffice-calc.desktop;
 application/vnd.oasis.opendocument.text=libreoffice-writer.desktop
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
-image/jpeg=nomacs.desktop
-image/png=nomacs.desktop
+image/jpeg=feh-3.desktop;
+image/png=feh-2.desktop;
 inode/directory=pcmanfm.desktop;
-# text/html=org.qutebrowser.qutebrowser.desktop
 text/html=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop
-x-scheme-handler/about=google-chrome.desktop
 x-scheme-handler/unknown=google-chrome.desktop

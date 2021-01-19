@@ -83,6 +83,7 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 
 
 " " ========= AUTOCOMMANDS ========== "
+autocmd FileType md call deoplete#custom#buffer_option('auto_complete', v:false) set g:loaded_python3_provider = 0
 " Enter/O/o doesn't created commented line when on commented line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Remembers the cursor position in file even after quiting it
@@ -160,6 +161,8 @@ nnoremap <C-n> :normal ]'zz <cr>
 nnoremap <C-p> :normal ['zz <cr>
 " Remove word highlighting
 map <esc> :noh<cr>
+" Uppercase 
+nnoremap <C-w> <Esc>gUiw`]
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 " Zoom a vim split

@@ -24,7 +24,7 @@ _comp_options+=(globdots)		# Include hidden files.
 eval "$(fasd --init auto)"
 
 # ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
-cv() {
+v() {
   local dir
   dir=$(
     cd /media/Volume && fd --ignore-file ~/.gitignore -0 -I --type d --hidden | fzf --read0
@@ -75,7 +75,7 @@ op() {
      xo $files
   fi
 }
-# open directory in pcmanfm from terminal
+# open directory in dolphin from terminal
 of() { bash /home/sols/.scripts/shell_scripts/pcman_tmux.sh }
 # sendkeys to right pane in tmux
 ts() { args=$@ ; tmux send-keys -t right "$args" C-m }
@@ -99,6 +99,8 @@ bindkey -v '^?' backward-delete-char
 
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias sc="systemctl "
+alias it="sxiv -t "
 alias mu="mupdf "
 alias gpom='git push origin master'
 alias a='fasd -a'        # any
@@ -122,7 +124,7 @@ alias sv="sudo nvim"
 alias vim="nvim"
 alias grep="grep -i --color=auto"
 alias lsf="ls -t --color | head -n 20"
-alias p="sudo pacman"
+alias p="sudo pacman --color always "
 alias l="less"
 alias tree="tree -C"
 alias pg="ping google.com"
