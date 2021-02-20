@@ -1,16 +1,18 @@
 " ============VimPlug (Plugin Manager)============ "
 call plug#begin()
 Plug 'preservim/nerdtree'
+Plug 'preservim/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
 Plug '907th/vim-auto-save'
 Plug 'easymotion/vim-easymotion'
-Plug 'Yggdroot/indentLine'
 " Supertab is needed for Ultisnips and deoplete to work well together
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 " deoplete provides async autocompletions
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" clang_complete provides autocompletions for c/c++
+Plug 'xavierd/clang_complete'
 " deoplete-jedi is specific for async python autocompletions
 Plug 'deoplete-plugins/deoplete-jedi'
 " jedi-vim = deoplete-jedi but deoplete-jedi can't jump to definitions, declarations etc
@@ -29,17 +31,25 @@ Plug 'tomtom/tcomment_vim'
 " Plug 'tpope/vim-obsession'
 " used to autoread a vim buffer if the file is changed outside of vim
 " Note - This plugin only works if a command is triggered within tmux.
-" Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
 call plug#end()
 
-
 " "==========BASIC LET AND SET==========="
+let g:clang_library_path='/usr/lib64/libclang.so.11.1'
+
+" /usr/lib/libclang.so
+" /usr/lib/libclang.so.11
+"
+" /usr/lib64/libclang.so
+" /usr/lib64/libclang.so.11
 let g:auto_save = 1  	    " enable AutoSave plugin on Vim startup
 let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_silent = 1  " do not display the auto-save notification
 " Disable tmux navigator when zooming the Vim pane
-let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_disable_when_zoomed = 0
 set termguicolors           " Enable GUI colors for the terminal to get truecolor
+set cursorline
 set background=dark
 let base16colorspace=256    " Access colors present in 256 colorspace
 set hidden  " Change buffers without saving a buffer
@@ -57,11 +67,9 @@ set shiftwidth=4
 set ignorecase
 set noswapfile
 set undofile " Undo file even after reopen
-let g:indentLine_char = '┊'
-let g:indentLine_fileTypeExclude = ['vimwiki']
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let mapleader = " "
-let maplocalleader = ","
+let maplocalleader = '\'
 " dynamic current window sizing from TBot Art of Vim
 set winwidth=85
 set winheight=20
@@ -100,8 +108,13 @@ au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab sm
 " Remove trailing whitespaces
 autocmd BufWritePre *.py :%s/\s\+$//e
 
-
 " " ========== REMAPS ========= "
+nnoremap n nzz
+nnoremap N Nzz
+" "_d register does not copies to content to system clipboard
+nnoremap c "_d
+nnoremap d "_d
+nmap <F8> :TagbarToggle<CR>
 nnoremap ]] ]]zz
 " j and k work as expected even in long wrapped paragraphs
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
@@ -151,6 +164,7 @@ nnoremap <silent><leader>sv :source $MYVIMRC<cr>
 nnoremap <silent><leader>ev :vsplit $MYVIMRC<cr>
 " Save files when not opened with sudo
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
 " Remapping :w :wq :q and :q!
 nnoremap <silent><leader>; :q!<cr>
 nnoremap <silent><leader>q :q<cr>
@@ -158,11 +172,10 @@ nnoremap <silent><leader>s :silent w<cr>
 nnoremap <leader>wq :wq<CR>
 " jump between marks
 nnoremap <C-n> :normal ]'zz <cr>
-nnoremap <C-p> :normal ['zz <cr>
 " Remove word highlighting
 map <esc> :noh<cr>
 " Uppercase 
-nnoremap <C-w> <Esc>gUiw`]
+" nnoremap <C-w> <Esc>gUiw`]
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 " Zoom a vim split
@@ -219,6 +232,8 @@ nmap <leader>l :Lines <cr>
 nmap <leader>g :Ag <cr>
 " Search through command history
 nmap <leader>c :History: <cr>
+" Search thru search history
+nmap <leader>C :call fzf#vim#search_history() <cr>
 
 
 " " ======= COLORS ======== "
@@ -234,4 +249,4 @@ let g:lightline = {
       \         'buffernumber': 'Bufno'
       \ },
       \ }
-colorscheme base16-solarized-light
+colorscheme base16-nord

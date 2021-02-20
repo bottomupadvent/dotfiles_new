@@ -39,7 +39,10 @@
 /home/sols/.Androi*/*
 /home/sols/.config/nvim/plugged/
 /home/sols/.tmux/plugins/
-/home/sols/Source/
+/home/sols/Source/fonts
+/home/sols/Source/darculized-everything-css
+/home/sols/Source/st
+/home/sols/Source/yay
 /home/sols/.cache_backup/
 /home/sols/.cups/
 /home/sols/.gnupg/

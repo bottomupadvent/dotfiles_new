@@ -13,8 +13,12 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap 
 export FZF_ALT_C_COMMAND="fd --max-depth 6 --ignore-file ~/.gitignore -H -t d . /"
 export FZF_CTRL_T_COMMAND="$FZF_ALT_C_COMMAND"
 export KEYTIMEOUT=1
-export BROWSER=firefox
-# Coloured man pages
+export BROWSER=google-chrome-stable
+export MANPAGER="less --ignore-case"
+# For autosuggestions plugin
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
+export ZSH_AUTOSUGGEST_STRATEGY=(history)
+ #Coloured man pages
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'

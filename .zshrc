@@ -24,6 +24,29 @@ _comp_options+=(globdots)		# Include hidden files.
 eval "$(fasd --init auto)"
 
 # ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
+_fzf_complete_doge() {
+  _fzf_complete --multi --reverse --prompt="doge> " -- "$@" < <(
+    echo very
+    echo wow
+    echo such
+    echo doge
+  )
+}
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
+    ssh)          fzf "$@" --preview 'dig {}' ;;
+    *)            fzf "$@" ;;
+  esac
+}
+bd() {
+    baloosearch type:document "$@"
+}
+
 v() {
   local dir
   dir=$(
@@ -48,7 +71,7 @@ auto-ls-custom_function () {
     ls --group-directories-first -X --color 
 }
 ap() {
-    apropos -s 1 $@ | less
+    apropos -w "$@" | less
 }
 # Commit .dotfiles to git in one function
 gce() {
@@ -99,6 +122,7 @@ bindkey -v '^?' backward-delete-char
 
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias jc="journalctl "
 alias sc="systemctl "
 alias it="sxiv -t "
 alias mu="mupdf "
@@ -143,6 +167,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zshenv
 source ~/antigen.zsh
 antigen use oh-my-zsh
+antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle mafredri/zsh-async
 antigen bundle git
 # antigen bundle desyncr/auto-ls
