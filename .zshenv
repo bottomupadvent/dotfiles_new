@@ -14,7 +14,7 @@ export FZF_ALT_C_COMMAND="fd --max-depth 6 --ignore-file ~/.gitignore -H -t d . 
 export FZF_CTRL_T_COMMAND="$FZF_ALT_C_COMMAND"
 export KEYTIMEOUT=1
 export BROWSER=google-chrome-stable
-export MANPAGER="less --ignore-case"
+export MANPAGER="less --IGNORE-CASE"
 # For autosuggestions plugin
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
 export ZSH_AUTOSUGGEST_STRATEGY=(history)

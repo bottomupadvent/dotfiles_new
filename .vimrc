@@ -67,12 +67,13 @@ set shiftwidth=4
 set ignorecase
 set noswapfile
 set undofile " Undo file even after reopen
+set mouse=nv
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let mapleader = " "
 let maplocalleader = '\'
 " dynamic current window sizing from TBot Art of Vim
 set winwidth=85
-set winheight=20
+set winheight=25
 
 " " ===========DEOPLETE and JEDI============= "
 let g:jedi#completions_enabled = 0 " disable autocomplete for jedi-vim cause we use deoplete for completion
@@ -91,6 +92,10 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 
 
 " " ========= AUTOCOMMANDS ========== "
+augroup filetypedetect
+  " Mail
+  autocmd BufRead,BufNewFile *mutt-* setfiletype mail
+augroup END
 autocmd FileType md call deoplete#custom#buffer_option('auto_complete', v:false) set g:loaded_python3_provider = 0
 " Enter/O/o doesn't created commented line when on commented line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -111,9 +116,8 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 " " ========== REMAPS ========= "
 nnoremap n nzz
 nnoremap N Nzz
-" "_d register does not copies to content to system clipboard
-nnoremap c "_d
-nnoremap d "_d
+" "_d register does not copy content to system clipboard
+" nnoremap d "_d
 nmap <F8> :TagbarToggle<CR>
 nnoremap ]] ]]zz
 " j and k work as expected even in long wrapped paragraphs
@@ -121,8 +125,6 @@ nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 " execute current line as if a command. Better than q:
 nnoremap <localleader>q :exe getline(line('.'))<cr>
-" acts like dd but doesn't put anything in register
-nnoremap s "_d
 " codeblock in markdown
 function CodeBlock()
     normal ohxi``````O 
@@ -238,10 +240,10 @@ nmap <leader>C :call fzf#vim#search_history() <cr>
 
 " " ======= COLORS ======== "
 let g:lightline = {
-      \ 'colorscheme': 'Tomorrow_Night_Bright',
+      \ 'colorscheme': 'nord',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename' , 'buffernumber', 'modified' ] ],
+      \             [ 'gitbranch', 'readonly', 'filename' , 'buffernumber', 'modified' ] ],
       \ 
       \   'right': [ [ 'percent', 'fileformat', 'fileencoding', 'filetype' ] ]
       \},
