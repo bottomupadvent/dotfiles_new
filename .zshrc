@@ -122,7 +122,9 @@ bindkey -v '^?' backward-delete-char
 
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias uf="ytfzf $@"
 alias jc="journalctl "
+alias vim="nvim"
 alias sc="systemctl "
 alias it="sxiv -t "
 alias mu="mupdf "
