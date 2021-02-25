@@ -101,7 +101,7 @@ op() {
 # open directory in dolphin from terminal
 of() { bash /home/sols/.scripts/shell_scripts/pcman_tmux.sh }
 # sendkeys to right pane in tmux
-ts() { args=$@ ; tmux send-keys -t right "$args" C-m }
+tsr() { args=$@ ; tmux send-keys -t right "$args" C-m }
 # Cheat sheet for all packages
 ch(){ curl cheat.sh/"$1" }
 # Search for packages and highlight package name
@@ -150,6 +150,10 @@ alias sv="sudo nvim"
 alias grep="grep -i --color=auto"
 alias lsf="ls -t --color | head -n 20"
 alias p="sudo pacman --color always "
+alias pf="sudo pacman --color always -Ss $@"
+alias pi="sudo pacman --color always -S $@"
+alias yf="yay -Ss $@"
+alias yi="yay -S $@"
 alias l="less"
 alias tree="tree -C"
 alias pg="ping google.com"
