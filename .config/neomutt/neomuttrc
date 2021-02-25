@@ -1,0 +1,49 @@
+#############################
+# CONFIGURED FROM ARCHWIKI
+#########
+# Sets password and mail variables
+source "gpg -dq $HOME/.config/neomutt/.p_pass.gpg |"
+source "gpg -dq $HOME/.config/neomutt/.p_mail.gpg |"
+# IMAP
+set imap_user = $my_pmail
+set imap_pass = $my_ppass
+set folder = "imaps://imap.gmail.com/"
+
+set spoolfile = "+INBOX"
+set postponed= "+[Gmail]/Drafts"
+
+set header_cache = "~/.config/neomutt/cache/headers"    # Increase speed for POP, IMAP MH or Maildir folders
+set certificate_file = "~/.config/neomutt/certificates"   # Mail encryption
+set signature = "~/.config/neomutt/.signature"
+set imap_check_subscribed
+
+########## 
+# SMTP 
+set smtp_url = "smtp://$my_pmail@smtp.gmail.com:587/"
+set smtp_pass = $imap_pass
+set ssl_force_tls = yes # Require encrypted connection
+unset record
+
+##########
+# OTHER
+set editor = "nvim"      # Set your favourite editor.
+set charset = UTF-8     # value of $LANG; also fallback for send_charset
+
+set from = "$my_pmail"
+set use_from = yes
+
+set sort=date        # primary sorting method
+set alias_file = ~/.config/neomutt/aliases
+set mark_old                  # Distinguish between seen (but unread) and new messages
+set markers = no
+
+macro index,pager U "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>""view URLs"
+
+############
+# Binds
+bind query q exit
+
+############
+# Sourcing
+source ~/.config/neomutt/mutt/dracula.muttrc
+source ~/.config/neomutt/vim-keys.rc
