@@ -98,8 +98,8 @@ keymap ESC-W DICT_WORD_AT
 
 # Mark operation
 keymap m MARK
-keymap ] NEXT_MARK
-keymap [ PREV_MARK
+# keymap ] NEXT_MARK
+# keymap [ PREV_MARK
 keymap  \"  REG_MARK
 
 # bookmark operation
@@ -107,7 +107,7 @@ keymap ESC-b VIEW_BOOKMARK
 keymap ESC-a ADD_BOOKMARK
 
 # Misc operation
-keymap \\ MENU
+# keymap \\ MENU
 keymap ESC-H HELP
 keymap ESC-o OPTIONS
 keymap ESC-k COOKIE

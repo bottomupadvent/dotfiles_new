@@ -24,7 +24,7 @@
 printf "\033c"
 
 # select your elvi
-PREFIX=$(surfraw -elvi | grep -v 'LOCAL\|GLOBAL'| fzf -e | awk '{print $1}')
+PREFIX=$(surfraw -elvi | grep -v 'LOCAL\|GLOBAL'| fzf | awk '{print $1}')
 
 # exit script if no elvi is selected (e.g hit ESC)
 # if [ "$PREFIX" = "" ]; then exit; fi
