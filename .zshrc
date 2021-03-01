@@ -103,6 +103,7 @@ bindkey -v '^?' backward-delete-char
 
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias yt="youtube-viewer $@"
 alias uf="ytfzf $@"
 alias jc="journalctl "
 alias vim="nvim"

@@ -15,6 +15,7 @@ export FZF_CTRL_T_COMMAND="$FZF_ALT_C_COMMAND"
 export KEYTIMEOUT=1
 export BROWSER=google-chrome-stable
 export BROWSERCLI=w3m
+export EDITOR=nvim
 export MANPAGER="less --IGNORE-CASE"
 # For autosuggestions plugin
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"

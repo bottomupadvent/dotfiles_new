@@ -1,7 +1,7 @@
 tabstop 4
 indent_incr 4
 pixel_per_char 9
-pixel_per_line 40
+pixel_per_line 25
 frame 0
 target_self 0
 open_tab_blank 1
@@ -22,13 +22,13 @@ fold_textarea 1
 display_ins_del 1
 ignore_null_img_alt 1
 view_unseenobject 1
-display_image 1
+display_image 0
 pseudo_inlines 1
 auto_image 1
 max_load_image 4
 ext_image_viewer 1
 image_scale 100
-imgdisplay /usr/bin/ueberzug
+imgdisplay /usr/lib/w3m/w3mimgdisplay
 image_map_list 1
 fold_line 1
 show_lnum 0
@@ -62,7 +62,7 @@ use_mouse 1
 reverse_mouse 1
 relative_wheel_scroll 0
 relative_wheel_scroll_ratio 5
-fixed_wheel_scroll_count 100
+fixed_wheel_scroll_count 10
 clear_buffer 1
 decode_cte 0
 auto_uncompress 0

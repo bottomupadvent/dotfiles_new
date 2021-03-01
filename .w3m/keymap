@@ -70,6 +70,7 @@ keymap r RELOAD
 keymap ESC-r RESHAPE
 
 # leader key = \
+keymap  \\\r    COMMAND       "SHELL 'readable $W3M_URL -p html-title,html-content > /tmp/readable.html' ; LOAD /tmp/readable.html"
 keymap  \\\t    COMMAND       "SET_OPTION display_borders=toggle ; RESHAPE"
 keymap  \\\i    COMMAND       "SET_OPTION display_image=toggle ; RELOAD"
 keymap  \\\e    COMMAND       "SET_OPTION user_agent='' ; RELOAD"
