@@ -1,6 +1,7 @@
 " ============VimPlug (Plugin Manager)============ "
 call plug#begin()
 Plug 'preservim/nerdtree'
+Plug 'lambdalisue/suda.vim'
 Plug 'preservim/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
