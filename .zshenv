@@ -16,7 +16,9 @@ export KEYTIMEOUT=1
 export BROWSER=google-chrome-stable
 export BROWSERCLI=w3m
 export EDITOR=nvim
-export MANPAGER="less --IGNORE-CASE"
+# export MANPAGER="less --IGNORE-CASE"
+export MANPAGER='nvim +Man!'
+export MANWIDTH=80
 # For autosuggestions plugin
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
 export ZSH_AUTOSUGGEST_STRATEGY=(history)

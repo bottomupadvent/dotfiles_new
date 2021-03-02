@@ -1,7 +1,8 @@
 " ============VimPlug (Plugin Manager)============ "
 call plug#begin()
 Plug 'preservim/nerdtree'
-Plug 'lambdalisue/suda.vim'
+" Write to non writable files
+Plug 'lambdalisue/suda.vim' 
 Plug 'preservim/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
@@ -38,6 +39,9 @@ call plug#end()
 
 " "==========BASIC LET AND SET==========="
 let g:clang_library_path='/usr/lib64/libclang.so.11.1'
+let g:suda#prompt = 'Password: '
+let g:suda_smart_edit = 1
+let g:man_hardwrap = $MANWIDTH
 
 " /usr/lib/libclang.so
 " /usr/lib/libclang.so.11
@@ -115,6 +119,7 @@ au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab sm
 autocmd BufWritePre *.py :%s/\s\+$//e
 
 " " ========== REMAPS ========= "
+nnoremap <leader>m :Man 
 nnoremap n nzz
 nnoremap N Nzz
 " "_d register does not copy content to system clipboard
@@ -187,7 +192,7 @@ nnoremap <leader>= :wincmd =<cr>
 nnoremap <localleader>e :call Send_keys() <CR><CR>
 nnoremap <C-o> <C-o>zz 
 nnoremap <C-i> <C-i>zz 
-nnoremap <leader>m :NERDTreeToggle<CR>
+nnoremap <leader>M :NERDTreeToggle<CR>
 
 
 " " ========= FUNCTIONS =========== "
