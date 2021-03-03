@@ -52,7 +52,7 @@ keymap C-g LINE_INFO
 # keymap O EXTERN_LINK
 
 # File/Stream operation
-keymap o GOTO
+keymap o GOTO; SET_OPTION default_url=0
 keymap @ READ_SHELL
 keymap # PIPE_SHELL
 keymap |   PIPE_BUF
@@ -93,8 +93,8 @@ keymap ESC-a ADD_BOOKMARK
 # Search 
 keymap / ISEARCH
 keymap ? ISEARCH_BACK
-keymap n SEARCH_NEXT
-keymap N SEARCH_PREV
+keymap n SEARCH_NEXT; CENTER_V
+keymap N SEARCH_PREV; CENTER_V
 
 # Dictionay look-up
 keymap ESC-w DICT_WORD
@@ -145,7 +145,7 @@ keymap  mf      EXTERN_LINK   'tsp mpv --ontop --no-border --force-window --auto
 keymap  me      EXTERN        'tsp mpv --ontop --no-border --force-window --autofit=500x280 --geometry=-15-53'
 
 # open external image viewer
-keymap  ff      EXTERN_LINK   'feh -. -x -B black -g 900x600-15+60 %s &'
+keymap  if      EXTERN_LINK   'feh -. -x -B black -g 900x600-15+60 %s &'
 
 ######################
 # My Custom Keybinding
@@ -153,8 +153,8 @@ keymap  ff      EXTERN_LINK   'feh -. -x -B black -g 900x600-15+60 %s &'
 
 # open current url (default: Shift+M)
 # e.g 2+Shift+M
-keymap  e EXTERN
+# keymap  e EXTERN
 
 # open url under cursor (default: Esc+Shift+M)
 # e.g 2+Esc+Shift+M
-keymap  f EXTERN_LINK
+# keymap  f EXTERN_LINK

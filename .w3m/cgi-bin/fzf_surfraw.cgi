@@ -40,7 +40,7 @@ read -r -e -p "  $PREFIX >> Enter Your Search Keyword: " INPUT
 # note: dont quote $INPUT it will mess up results
 
 # copy to xsel primary (aka shift-insert)
-# surfraw -p "$PREFIX" $INPUT | xsel -p
+surfraw -p "$PREFIX" $INPUT | xsel -p
 
 # copy to xsel system clipboard (aka ctrl-v)
 surfraw -p "$PREFIX" $INPUT | xsel -b

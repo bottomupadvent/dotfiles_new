@@ -8,25 +8,21 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +1 man://man(1)
-badd +20 man://tmux(1)
-badd +0 man://sddm(1)
+badd +3 man://sddm(1)
+badd +36 man://polybar(1)
+badd +300 man://grep(1)
+badd +5 man://tmux(1)
 argglobal
 %argdel
 set splitbelow splitright
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
 wincmd t
 set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 25 + 18) / 37)
-exe '2resize ' . ((&lines * 9 + 18) / 37)
 argglobal
 enew
-file man://sddm(1)
+file man://tmux(1)
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -35,27 +31,6 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal nofen
-wincmd w
-argglobal
-if bufexists("/usr/share/nvim/runtime/doc/windows.txt") | buffer /usr/share/nvim/runtime/doc/windows.txt | else | edit /usr/share/nvim/runtime/doc/windows.txt | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal nofen
-silent! normal! zE
-let s:l = 233 - ((5 * winheight(0) + 4) / 9)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-233
-normal! 057|
-wincmd w
-exe '1resize ' . ((&lines * 25 + 18) / 37)
-exe '2resize ' . ((&lines * 9 + 18) / 37)
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
