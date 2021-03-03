@@ -50,8 +50,11 @@
 # "xterm"
 #   control + b:2
 
-"xdotool sleep 0.04 key ctrl+BackSpace"
-  Shift+Mod2 + BackSpace
+"~/.scripts/shell_scripts/gui_webpage_to_w3m.sh"
+control+Alt+w
+
+# "xdotool sleep 0.04 key ctrl+BackSpace"
+#   Shift+Mod2 + BackSpace
   # Shift+Mod2 + Shift_L
   # Control+Shift+Mod2 + Shift_L
 # "xdotool key F2"

@@ -17,7 +17,7 @@ badd +15 vimwiki/Linux\ Book.md
 badd +31 vimwiki/Redundant\ Stuff.md
 badd +11 .scripts/c/test.c
 badd +15 .scripts/c/test_calc.c
-badd +62 .tmux.conf
+badd +63 .tmux.conf
 badd +40 .config/neomutt/neomuttrc
 badd +6 .config/neomutt/aliases
 badd +82 .w3m/config
@@ -27,17 +27,19 @@ badd +15 .config/newsboat/urls
 badd +27 .urlview
 badd +12 .scripts/shell_scripts/urlview_handler.sh
 badd +33 .config/newsboat/config
-badd +8 vimwiki/Daily_basis_programs.md
+badd +9 vimwiki/Daily_basis_programs.md
 badd +1 .config/surfraw/conf
 badd +16 .config/polybar/config
-badd +43 .w3m/cgi-bin/fzf_surfraw.cgi
+badd +49 .w3m/cgi-bin/fzf_surfraw.cgi
 badd +10 .config/polybar/launch.sh
-badd +1 suda:///usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi
-badd +62 .xbindkeysrc
+badd +36 suda:///usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi
+badd +53 .xbindkeysrc
+badd +2 .scripts/shell_scripts/gui_webpage_to_w3m.sh
+badd +1 .config/mimeapps.list
 argglobal
 %argdel
 $argadd .zshrc
-edit .xbindkeysrc
+edit .scripts/shell_scripts/gui_webpage_to_w3m.sh
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -54,11 +56,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 62 - ((12 * winheight(0) + 13) / 26)
+let s:l = 2 - ((1 * winheight(0) + 13) / 26)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-62
+2
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
