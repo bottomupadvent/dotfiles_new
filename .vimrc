@@ -227,7 +227,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " command history
 " nmap <leader>
 " Search in hidden dir
-let $FZF_DEFAULT_COMMAND = 'ag --depth 4 -p ~/.gitignore --hidden --ignore .git -l -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --depth 10 -p ~/.gitignore --hidden --ignore .git -l -g ""'
 " Search and switch buffers
 nmap <leader>b :Buffers <cr>
 " Find files by name under the home directory

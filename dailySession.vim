@@ -11,13 +11,13 @@ badd +106 .zshrc
 badd +21 .zshenv
 badd +1 .gitignore
 badd +4 .vimrc
-badd +10 vimwiki/index.md
-badd +6 vimwiki/Tasks.md
+badd +16 vimwiki/index.md
+badd +62 vimwiki/Tasks.md
 badd +15 vimwiki/Linux\ Book.md
-badd +31 vimwiki/Redundant\ Stuff.md
+badd +33 vimwiki/Redundant\ Stuff.md
 badd +11 .scripts/c/test.c
 badd +15 .scripts/c/test_calc.c
-badd +63 .tmux.conf
+badd +80 .tmux.conf
 badd +40 .config/neomutt/neomuttrc
 badd +6 .config/neomutt/aliases
 badd +82 .w3m/config
@@ -36,10 +36,13 @@ badd +36 suda:///usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi
 badd +53 .xbindkeysrc
 badd +2 .scripts/shell_scripts/gui_webpage_to_w3m.sh
 badd +1 .config/mimeapps.list
+badd +1 vimwiki/Baba.md
+badd +25 vimwiki/Geeta_Notes.md
+badd +1 vimwiki/Future.md
 argglobal
 %argdel
 $argadd .zshrc
-edit .scripts/shell_scripts/gui_webpage_to_w3m.sh
+edit vimwiki/Baba.md
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -56,11 +59,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 2 - ((1 * winheight(0) + 13) / 26)
+let s:l = 1 - ((0 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2
+1
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

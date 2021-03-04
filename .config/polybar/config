@@ -97,11 +97,11 @@ label = %date%
  
 [module/network]
 type = internal/network
-interface = wlp0s19f2u3u3
+interface = wlp0
 ; Seconds to sleep between updates
 ; Default: 1
 interval = 3.0
-; accumulate-stats = true
+accumulate-stats = true
 ; unknown-as-up = true
 
 
