@@ -34,7 +34,7 @@ badd +49 .w3m/cgi-bin/fzf_surfraw.cgi
 badd +10 .config/polybar/launch.sh
 badd +36 suda:///usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi
 badd +53 .xbindkeysrc
-badd +2 .scripts/shell_scripts/gui_webpage_to_w3m.sh
+badd +5 .scripts/shell_scripts/gui_webpage_to_w3m.sh
 badd +1 .config/mimeapps.list
 badd +1 vimwiki/Baba.md
 badd +25 vimwiki/Geeta_Notes.md
@@ -42,7 +42,7 @@ badd +1 vimwiki/Future.md
 argglobal
 %argdel
 $argadd .zshrc
-edit vimwiki/Baba.md
+edit .scripts/shell_scripts/gui_webpage_to_w3m.sh
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -59,11 +59,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 12) / 24)
+let s:l = 5 - ((4 * winheight(0) + 13) / 27)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+5
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

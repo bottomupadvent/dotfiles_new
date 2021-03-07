@@ -30,6 +30,9 @@ badd +124 man://xwininfo(1)
 badd +452 man://pacman(8)
 badd +43 man://yay(8)
 badd +1 man://lsmod(8)
+badd +1 man://insmod(8)
+badd +1 man://install(1)
+badd +124 man://updatedb(8)
 argglobal
 %argdel
 set splitbelow splitright
@@ -40,7 +43,7 @@ set winminwidth=0
 set winwidth=1
 argglobal
 enew
-file man://lsmod(8)
+file man://gdb(1)
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}

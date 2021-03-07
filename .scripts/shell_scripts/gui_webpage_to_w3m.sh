@@ -3,7 +3,7 @@
 # Copies current tab URL in google-chrome and open it in w3m
 # Script requires xdotool, tmux, google-chrome, xsel
 
-xdotool search --name "google-chrome" key ctrl+l ctrl+c
+xdotool key ctrl+l ctrl+c
 tmux run-shell "xsel -op > /tmp/webpage_url.chrome" ; tmux load-buffer /tmp/webpage_url.chrome
 tmux switch-client -t web:0.1
 tmux send-keys t o C-u ; tmux paste-buffer ; tmux send-keys Enter
