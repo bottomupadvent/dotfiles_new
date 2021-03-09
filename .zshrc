@@ -103,6 +103,7 @@ bindkey -v '^?' backward-delete-char
 
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias diff="diff --color=always "
 alias w3m="TERM=xterm w3m"
 alias yt="youtube-viewer $@"
 alias uf="ytfzf $@"

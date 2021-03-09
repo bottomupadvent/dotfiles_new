@@ -13,13 +13,11 @@ badd +36 man://polybar(1)
 badd +300 man://grep(1)
 badd +68 man://w3m(1)
 badd +253 man://feh(1)
-badd +1368 man://tmux(1)
-badd +35 man://xbindkeys(1)
-badd +279 man://xdotool(1)
+badd +1 man://tmux(1)
+badd +1 man://xbindkeys(1)
+badd +1 man://xdotool(1)
 badd +114 man://xsel(1x)
-badd +44 .config/nvim/init.vim
 badd +136 man://google-chrome-stable(1)
-badd +1 man://gdb(1)
 badd +211 man://xprop(1)
 badd +48 man://xdg-open(1)
 badd +1 man://xdg-mime(1)
@@ -33,6 +31,8 @@ badd +1 man://lsmod(8)
 badd +1 man://insmod(8)
 badd +1 man://install(1)
 badd +124 man://updatedb(8)
+badd +1 man://hier(7)
+badd +896 man://git(1)
 argglobal
 %argdel
 set splitbelow splitright
@@ -43,7 +43,7 @@ set winminwidth=0
 set winwidth=1
 argglobal
 enew
-file man://gdb(1)
+file man://git(1)
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}

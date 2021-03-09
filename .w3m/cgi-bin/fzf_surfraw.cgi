@@ -45,6 +45,8 @@ surfraw -p "$PREFIX" $INPUT | xsel -p
 # copy to xsel system clipboard (aka ctrl-v)
 surfraw -p "$PREFIX" $INPUT | xsel -b
 
+tmux send-keys -t web:0.1 Enter
+
 # copy to tmux clipboard
 # tmux set-buffer "$(surfraw -p "$PREFIX" $INPUT)"
 # pidof tmux >/dev/null && tmux set-buffer "$(surfraw -p "$PREFIX" "$INPUT")"

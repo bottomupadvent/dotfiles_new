@@ -2,7 +2,6 @@
 call plug#begin()
 Plug 'preservim/nerdtree'
 " Write to non writable files
-Plug 'lambdalisue/suda.vim' 
 Plug 'preservim/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
@@ -39,8 +38,8 @@ call plug#end()
 
 " "==========BASIC LET AND SET==========="
 let g:clang_library_path='/usr/lib64/libclang.so.11.1'
-let g:suda#prompt = 'Password: '
-let g:suda_smart_edit = 1
+" let g:suda#prompt = 'Password: '
+" let g:suda_smart_edit = 1
 let g:man_hardwrap = $MANWIDTH
 
 " /usr/lib/libclang.so
