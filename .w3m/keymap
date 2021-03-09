@@ -42,8 +42,8 @@ keymap M MARK_WORD
 # keymap M  MARK_URL
 keymap C-t TAB_LINK
 keymap C-s SAVE_LINK
-keymap V  VIEW_IMAGE
-# keymap V  PEEK_IMG
+# keymap V  VIEW_IMAGE
+keymap V  PEEK_IMG
 keymap i  VIEW_IMAGE
 
 keymap ESC-i SAVE_IMAGE

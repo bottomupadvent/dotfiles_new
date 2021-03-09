@@ -51,7 +51,11 @@
 #   control + b:2
 
 "~/.scripts/shell_scripts/gui_webpage_to_w3m.sh"
-control+Alt+w
+control+alt+w
+# m:0x18 + c:46  # Equivalent to control+alt+w
+    # m:0x1c + c:56
+    # Control+Alt+Mod2 + Alt_L
+    # Control+Alt+Mod2 + b
 
 # "xdotool sleep 0.04 key ctrl+BackSpace"
 #   Shift+Mod2 + BackSpace
