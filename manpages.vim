@@ -32,7 +32,10 @@ badd +1 man://insmod(8)
 badd +1 man://install(1)
 badd +124 man://updatedb(8)
 badd +1 man://hier(7)
-badd +896 man://git(1)
+badd +13 man://entr(1)
+badd +584 man://nmcli(1)
+badd +15 man://NetworkManager(8)
+badd +1 man://ln(1)
 argglobal
 %argdel
 set splitbelow splitright
@@ -43,7 +46,7 @@ set winminwidth=0
 set winwidth=1
 argglobal
 enew
-file man://git(1)
+file man://ln(1)
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}

@@ -57,7 +57,7 @@ padding-left = 2
 padding-right = 2
 module-margin = 1.5
 
-modules-left = network memory 
+modules-left = wifi_script memory 
 ; modules-center = i3
 modules-right = temperature date time
 
@@ -108,6 +108,14 @@ accumulate-stats = true
 ; label-disconnected = %essid%
 label-connected = ON
 label-disconnected = OFF
+
+[module/wifi_script]
+type = custom/script
+
+; Available tokens:
+;   %counter%
+; Command to be executed (using "/bin/sh -c [command]")
+exec = ls /sys/class/net/wlp0s19f2u3u3/operstate | entr -s "~/.scripts/shell_scripts/wifi_polybar.sh"
 
 ; [module/wlan]
 ; type = internal/network

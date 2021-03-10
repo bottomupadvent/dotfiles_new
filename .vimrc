@@ -169,7 +169,7 @@ nnoremap <silent><C-r> :silent redo<cr>
 " Sourcing .vimrc
 nnoremap <silent><leader>sv :source $MYVIMRC<cr>
 nnoremap <silent><leader>ev :vsplit $MYVIMRC<cr>
-" Save files when not opened with sudo
+" Save files when not opened with sudo (Doesn't work with neovim)
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Remapping :w :wq :q and :q!
