@@ -85,7 +85,7 @@ keymap L NEXT_TAB
 keymap t NEW_TAB
 keymap T TAB_MENU
 keymap d CLOSE_TAB
-keymap O TAB_LINK
+keymap O TAB_LINK;
 
 keymap ESC-b VIEW_BOOKMARK
 keymap ESC-a ADD_BOOKMARK
