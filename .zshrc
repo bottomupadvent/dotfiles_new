@@ -103,6 +103,8 @@ bindkey -v '^?' backward-delete-char
 
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias hp="hp-print $@"
+alias hs="hp-scan --mode=color -o $@" 
 alias diff="diff --color=always "
 alias w3m="TERM=xterm w3m"
 alias yt="youtube-viewer $@"

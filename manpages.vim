@@ -35,7 +35,7 @@ badd +1 man://hier(7)
 badd +13 man://entr(1)
 badd +584 man://nmcli(1)
 badd +15 man://NetworkManager(8)
-badd +1 man://ln(1)
+badd +1 man://xargs(1)
 argglobal
 %argdel
 set splitbelow splitright
@@ -46,7 +46,7 @@ set winminwidth=0
 set winwidth=1
 argglobal
 enew
-file man://ln(1)
+file man://tmux(1)
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
