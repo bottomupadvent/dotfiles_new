@@ -57,6 +57,17 @@ control+alt+w
     # Control+Alt+Mod2 + Alt_L
     # Control+Alt+Mod2 + b
 
+"konsole_winID=$(xdotool search --name '~ : tmux: client') ; xdotool windowactivate $konsole_winID ; tmux switch-client -t temp:0.1"
+alt+e
+
+"konsole_winID=$(xdotool search --name '~ : tmux: client') ; xdotool windowactivate $konsole_winID ; tmux switch-client -t web:1.1"
+alt+i
+
+"konsole_winID=$(xdotool search --name '~ : tmux: client') ; xdotool windowactivate $konsole_winID ; tmux switch-client -t web:0.1"
+alt+w
+
+"konsole_winID=$(xdotool search --name '~ : tmux: client') ; xdotool windowactivate $konsole_winID ; tmux switch-client -t temp:2.1"
+alt+m
 # "xdotool sleep 0.04 key ctrl+BackSpace"
 #   Shift+Mod2 + BackSpace
   # Shift+Mod2 + Shift_L
