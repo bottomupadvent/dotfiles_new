@@ -103,6 +103,7 @@ bindkey -v '^?' backward-delete-char
 
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias vs="cd ~/vimwiki ; git status ; cd \"$OLDPWD\""
 alias hp="hp-print $@"
 alias hs="hp-scan --mode=color -o $@" 
 alias diff="diff --color=always "
