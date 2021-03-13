@@ -10,14 +10,14 @@ set shortmess=aoO
 badd +106 .zshrc
 badd +21 .zshenv
 badd +1 .gitignore
-badd +4 .vimrc
-badd +1 vimwiki/index.md
+badd +138 .vimrc
+badd +3 vimwiki/index.md
 badd +22 vimwiki/Tasks.md
-badd +15 vimwiki/Linux\ Book.md
-badd +33 vimwiki/Redundant\ Stuff.md
+badd +630 vimwiki/Linux\ Book.md
+badd +9 vimwiki/Redundant\ Stuff.md
 badd +11 .scripts/c/test.c
 badd +15 .scripts/c/test_calc.c
-badd +86 .tmux.conf
+badd +83 .tmux.conf
 badd +40 .config/neomutt/neomuttrc
 badd +6 .config/neomutt/aliases
 badd +82 .w3m/config
@@ -32,9 +32,8 @@ badd +1 .config/surfraw/conf
 badd +16 .config/polybar/config
 badd +49 .w3m/cgi-bin/fzf_surfraw.cgi
 badd +10 .config/polybar/launch.sh
-badd +32 suda:///usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi
-badd +50 .xbindkeysrc
-badd +7 .scripts/shell_scripts/gui_webpage_to_w3m.sh
+badd +67 .xbindkeysrc
+badd +9 .scripts/shell_scripts/gui_webpage_to_w3m.sh
 badd +1 .config/mimeapps.list
 badd +1 vimwiki/Baba.md
 badd +25 vimwiki/Geeta_Notes.md
@@ -43,10 +42,13 @@ badd +161 .tmux/plugins/tmux-sensible/sensible.tmux
 badd +1 vimwiki/Linux_Read.md
 badd +17 .tmux/plugins/vim-tmux-navigator/vim-tmux-navigator.tmux
 badd +1 vimwiki/College.md
+badd +64 vimwiki/Aai.md
+badd +1 Downloads/lic_mly_due_list.txt
+badd +2 Downloads/final_lic_mly_due_list.md
 argglobal
 %argdel
 $argadd .zshrc
-edit .w3m/cgi-bin/fzf_surfraw.cgi
+edit Downloads/final_lic_mly_due_list.md
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -63,11 +65,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 49 - ((24 * winheight(0) + 12) / 25)
+let s:l = 2 - ((1 * winheight(0) + 17) / 34)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-49
+2
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
