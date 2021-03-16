@@ -49,7 +49,7 @@ let g:man_hardwrap = $MANWIDTH
 " /usr/lib64/libclang.so
 " /usr/lib64/libclang.so.11
 
-" "========== Web article Checking coc nvim ----------"
+" " COC nvim config "
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -58,7 +58,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -229,7 +229,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let mapleader = " "
 let maplocalleader = '\'
 " dynamic current window sizing from TBot Art of Vim
-set winwidth=85
+set winwidth=90
 set winheight=25
 
 " " ===========DEOPLETE and JEDI============= "
