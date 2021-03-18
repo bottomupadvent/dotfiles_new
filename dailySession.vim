@@ -10,7 +10,7 @@ set shortmess=aoO
 badd +106 .zshrc
 badd +21 .zshenv
 badd +1 .gitignore
-badd +372 .vimrc
+badd +1 .vimrc
 badd +3 vimwiki/index.md
 badd +22 vimwiki/Tasks.md
 badd +630 vimwiki/Linux\ Book.md
@@ -21,7 +21,7 @@ badd +83 .tmux.conf
 badd +40 .config/neomutt/neomuttrc
 badd +6 .config/neomutt/aliases
 badd +82 .w3m/config
-badd +47 .w3m/keymap
+badd +1 .w3m/keymap
 badd +1 .config/neomutt/vim-keys.rc
 badd +15 .config/newsboat/urls
 badd +27 .urlview
@@ -43,11 +43,10 @@ badd +1 vimwiki/Linux_Read.md
 badd +17 .tmux/plugins/vim-tmux-navigator/vim-tmux-navigator.tmux
 badd +1 vimwiki/College.md
 badd +64 vimwiki/Aai.md
-badd +1 Downloads/lic_mly_due_list.txt
 argglobal
 %argdel
 $argadd .zshrc
-edit .vimrc
+edit .w3m/keymap
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -64,12 +63,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 372 - ((15 * winheight(0) + 15) / 31)
+let s:l = 1 - ((0 * winheight(0) + 16) / 32)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-372
-normal! 018|
+1
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

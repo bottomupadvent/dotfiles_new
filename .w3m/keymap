@@ -23,8 +23,8 @@ keymap < SHIFT_LEFT
 keymap > SHIFT_RIGHT
 keymap \^,C-a LINE_BEGIN
 keymap $ LINE_END
-keymap C-e DOWN
-keymap C-y UP
+keymap C-e UP
+keymap C-y DOWN
 keymap Z CENTER_H
 keymap z CENTER_V
 keymap g BEGIN

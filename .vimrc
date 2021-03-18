@@ -8,7 +8,7 @@ Plug 'vimwiki/vimwiki'
 Plug '907th/vim-auto-save'
 Plug 'easymotion/vim-easymotion'
 " Supertab is needed for Ultisnips and deoplete to work well together
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " deoplete provides async autocompletions
@@ -43,12 +43,6 @@ call plug#end()
 " let g:suda_smart_edit = 1
 let g:man_hardwrap = $MANWIDTH
 
-" /usr/lib/libclang.so
-" /usr/lib/libclang.so.11
-"
-" /usr/lib64/libclang.so
-" /usr/lib64/libclang.so.11
-
 " " COC nvim config "
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -58,11 +52,11 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=1
+set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=200
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -182,21 +176,50 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <localleader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <localleader>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <localleader>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <localleader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <localleader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <localleader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <localleader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <localleader>p  :<C-u>CocListResume<CR>
+
+" Use tab for snippets completion (For coc-snippets)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 
 
 
@@ -225,25 +248,12 @@ set ignorecase
 set noswapfile
 set undofile " Undo file even after reopen
 set mouse=nv
-let g:SuperTabDefaultCompletionType = "<c-n>"
 let mapleader = " "
 let maplocalleader = '\'
 " dynamic current window sizing from TBot Art of Vim
-set winwidth=90
-set winheight=25
+" set winwidth=90
+" set winheight=25
 
-" " ===========DEOPLETE and JEDI============= "
-" let g:jedi#completions_enabled = 0 " disable autocomplete for jedi-vim cause we use deoplete for completion
-" let g:jedi#auto_vim_configuration = 0
-" let g:jedi#show_call_signatures = "0"
-" " let g:jedi#documentation_command = "D"
-" let g:jedi#goto_assignments_command = "<leader>a"
-" let g:jedi#goto_definitions_command = "<leader>d"
-" let g:jedi#goto_stubs_command = "<leader>c"
-" let g:jedi#use_splits_not_buffers = "right"
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#sources#jedi#enable_typeinfo = 0
-" let g:python3_host_prog = '/usr/bin/python'  " python interpreter for deoplete-jedi
 
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
@@ -320,6 +330,8 @@ nnoremap g; g;zz
 nnoremap g, g,zz
 " Following 1 line Just keep it
 vnoremap K k
+" " Search for visual selected words " 
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <silent>u :silent undo<cr>
 nnoremap <silent><C-r> :silent redo<cr>
 " Sourcing .vimrc
@@ -370,12 +382,12 @@ let g:EasyMotion_smartcase = 1
 
 
 " " ============ ULTISNIPS ================ "
-map <F7> :UltiSnipsEdit<CR>
-let g:UltiSnipsSnippetDirectories=['~/.vim/UltiSnips/']
-" let g:UltiSnipsListSnippets="<c-e>"
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" map <F7> :UltiSnipsEdit<CR>
+" let g:UltiSnipsSnippetDirectories=['~/.vim/UltiSnips/']
+" " let g:UltiSnipsListSnippets="<c-e>"
+" let g:UltiSnipsExpandTrigger = "<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 " " =========== FZF ============ "
