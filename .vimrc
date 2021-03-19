@@ -346,7 +346,7 @@ nnoremap <silent><leader>q :q<cr>
 nnoremap <silent><leader>s :silent w<cr>
 nnoremap <leader>wq :wq<CR>
 " jump between marks
-nnoremap <C-n> :normal ]'zz <cr>
+" nnoremap <C-n> :normal ]'zz <cr>
 " Remove word highlighting
 map <esc> :noh<cr>
 " Uppercase 
