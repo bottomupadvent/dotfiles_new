@@ -103,6 +103,8 @@ bindkey -v '^?' backward-delete-char
 
 
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
+alias nnn="nnn -e"
+alias ls="nnn -e"
 alias vs="cd ~/vimwiki ; git status ; cd \"$OLDPWD\""
 alias hp="hp-print $@"
 alias hs="hp-scan --mode=color -o $@" 
@@ -148,7 +150,7 @@ alias feh="feh -. "
 alias sz="source ~/.zshrc"
 alias config='/usr/bin/git --git-dir=/home/sols/.cfg/ --work-tree=/home/sols'
 alias cs="config status"
-alias ls="ls --group-directories-first -X --color"
+# alias ls="ls --group-directories-first -X --color"
 alias ll="ls -lha --group-directories-first -X --color"
 alias la="ls -a --group-directories-first -X --color"
 

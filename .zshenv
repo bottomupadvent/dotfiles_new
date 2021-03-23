@@ -22,6 +22,9 @@ export MANWIDTH=80
 # For autosuggestions plugin
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
 export ZSH_AUTOSUGGEST_STRATEGY=(history)
+export NNN_PLUG='c:"cd $(sh <(echo \"$FZF_ALT_C_COMMAND\") | fzf)";o:fzopen;j:autojump;p:preview-tui;i:imgview;d:dragd'
+export NNN_FCOLORS='0000E6310000000000000000'
+export NNN_FIFO="/tmp/nnn.fifo"
  #Coloured man pages
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'

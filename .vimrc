@@ -3,6 +3,7 @@ call plug#begin()
 Plug 'preservim/nerdtree'
 " Write to non writable files
 Plug 'preservim/tagbar'
+Plug 'mcchrish/nnn.vim'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
 Plug '907th/vim-auto-save'
@@ -258,6 +259,9 @@ let maplocalleader = '\'
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
+
+" Floating window (neovim latest and vim with patch 8.2.191)
+let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Debug' } }
 
 " " ========= AUTOCOMMANDS ========== "
 augroup filetypedetect
