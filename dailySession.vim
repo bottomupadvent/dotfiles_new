@@ -43,10 +43,13 @@ badd +1 vimwiki/Linux_Read.md
 badd +17 .tmux/plugins/vim-tmux-navigator/vim-tmux-navigator.tmux
 badd +1 vimwiki/College.md
 badd +64 vimwiki/Aai.md
+badd +8 Source/st/config.h
+badd +254 .config/i3/config
+badd +40 .config/qutebrowser/config.py
 argglobal
 %argdel
 $argadd .zshrc
-edit .w3m/keymap
+edit .config/qutebrowser/config.py
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -63,12 +66,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 16) / 32)
+let s:l = 40 - ((13 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+40
+normal! 031|
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

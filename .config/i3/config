@@ -23,11 +23,11 @@ set $mod Mod1
 set $term st
 
 #Workspace settings 
-set $ws1 "1" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
-set $ws2 "2" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
-set $ws3 "3" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
-set $ws4 "4" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
-set $ws5 "5" gaps right current set 70; gaps left current set 70; gaps top current set 0; gaps bottom current set 0;
+set $ws1 "1" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
+set $ws2 "2" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
+set $ws3 "3" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
+set $ws4 "4" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
+set $ws5 "5" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -36,15 +36,15 @@ set $ws10 "10"
 
 ###---Audio and Music Definitions---###
 ###For mpc:
-set $pause --no-startup-id mpc toggle
-set $trupause --no-startup-id mpc pause
-set $next --no-startup-id mpc next
-set $prev --no-startup-id mpc prev
-set $lilfor --no-startup-id mpc seek +10
-set $bigfor --no-startup-id mpc seek +50
-set $lilbak --no-startup-id mpc seek -10
-set $bigbak --no-startup-id mpc seek -50
-set $beg --no-startup-id mpc seek 0%
+# set $pause --no-startup-id mpc toggle
+# set $trupause --no-startup-id mpc pause
+# set $next --no-startup-id mpc next
+# set $prev --no-startup-id mpc prev
+# set $lilfor --no-startup-id mpc seek +10
+# set $bigfor --no-startup-id mpc seek +50
+# set $lilbak --no-startup-id mpc seek -10
+# set $bigbak --no-startup-id mpc seek -50
+# set $beg --no-startup-id mpc seek 0%
 
 # FOR ALSA/AMIXER
 # set $inc --no-startup-id amixer -c 1 sset Headphone 2%+
@@ -92,7 +92,7 @@ bindsym $mod+grave            exec xset dpms force off
 # Workspace back and forth
 bindsym $mod+Tab               workspace back_and_forth
 bindsym $mod+n                 workspace next
-bindsym $mod+semicolon         workspace prev
+bindsym $mod+p                 workspace prev
 
 # Layouts
 bindsym $mod+s       layout stacking 
@@ -146,9 +146,9 @@ bindsym $mod+Shift+u	resize grow height 5 px or 5 ppt
 bindsym $mod+Shift+o	resize grow width 5 px or 5 ppt
 # Gaps
 bindsym $mod+Shift+d	    gaps inner current set 7; gaps outer current set 3
-bindsym $mod+Shift+t        gaps inner current set 1; gaps outer current set 0
-bindsym $mod+z              gaps outer current plus 2
-bindsym $mod+Shift+z        gaps outer current minus 2
+bindsym $mod+Shift+t        gaps inner current set 1; gaps outer current set 1
+# bindsym $mod+z              gaps outer current plus 2
+# bindsym $mod+Shift+z        gaps outer current minus 2
 bindsym $mod+f              fullscreen toggle
 
 # Bindings to execute    
@@ -157,28 +157,27 @@ bindsym $mod+x                      exec --no-startup-id ~/.config/i3/lock.sh
 bindsym $mod+Shift+m                exec transset -a --dec .10
 bindsym $mod+Shift+n                exec transset -a --inc .10
 bindsym $mod+d                	    exec dmenu_run
-bindsym $mod+Shift+g                exec firefox 
 bindsym $mod+Return                 exec $term; exec "bash -c 'sleep 0.2s;i3-msg floating enable'"
 bindsym $mod+Home                   exec pcmanfm
 # bindsym $mod+Home                   exec nautilus --no-desktop
 
 # Music Bindings
 # For advancing forward/backward in an mpd song
-bindsym $mod+bracketleft                exec $lilbak
-bindsym $mod+Shift+bracketleft          exec $bigbak
-bindsym $mod+bracketright               exec $lilfor
-bindsym $mod+Shift+bracketright         exec $bigfor
+# bindsym $mod+bracketleft                exec $lilbak
+# bindsym $mod+Shift+bracketleft          exec $bigbak
+# bindsym $mod+bracketright               exec $lilfor
+# bindsym $mod+Shift+bracketright         exec $bigfor
+#
+# bindsym $mod+greater                exec $next
+# bindsym $mod+less                   exec $prev
+# bindsym $mod+Shift+less             exec $beg
+# bindsym $mod+p                      exec $pause && mpc volume 40
 
-bindsym $mod+greater                exec $next
-bindsym $mod+less                   exec $prev
-bindsym $mod+Shift+less             exec $beg
-bindsym $mod+p                      exec $pause && mpc volume 40
-
-bindsym $mod+Up                     exec $inc
-bindsym $mod+Down                   exec $dec
-bindsym XF86AudioRaiseVolume        exec $inc
-bindsym XF86AudioLowerVolume        exec $dec
-bindsym XF86AudioMute               exec $headphonetoggle
+# bindsym $mod+Up                     exec $inc
+# bindsym $mod+Down                   exec $dec
+# bindsym XF86AudioRaiseVolume        exec $inc
+# bindsym XF86AudioLowerVolume        exec $dec
+# bindsym XF86AudioMute               exec $headphonetoggle
 
 bindsym --release $mod+F2           exec scrot s.png -s
 bindsym $mod+F3                	    exec ~/.scripts/shell_scripts/polyhide.sh
@@ -218,26 +217,26 @@ bindsym $mod+F4                     exec ~/.scripts/shell_scripts/redshift.sh
 # exec --no-startup-id xinput --set-prop 8 293 0, 1
 
 # Unclutter makes the mouse invisible after a brief period
-# exec --no-startup-id unclutter
+exec --no-startup-id unclutter
 
 # exec --no-startup-id compton --config ~/.config/compton/config -b 
 # exec feh --bg-fill ~/.config/wall.png
 # exec --no-startup-id bash ~/.config/polybar/launch.sh
-# exec --no-startup-id nmcli networking on
+exec --no-startup-id nmcli networking on
 exec_always --no-startup-id sleep 1 && xmodmap ~/.Xmodmap
 # exec_always --no-startup-id sleep 2.5 && bash ~/Solstice/bash_scripts/alsa/alsa.sh
 exec_always --no-startup-id sleep 1 && xset r rate 250 0
-# focus_follows_mouse no
+focus_follows_mouse no
 
 
-force_focus_wrapping no
-popup_during_fullscreen smart
+# force_focus_wrapping no
+# popup_during_fullscreen smart
 # Activate smart borders (always)
-smart_borders on
+# smart_borders on
 # Activate smart borders (only when there are effectively no gaps)
 # smart_borders no_gaps
 # smart_gaps on
-hide_edge_borders on
+# hide_edge_borders on
 # Mount other drives:
 # exec --no-startup-id sudo mount -a
 
@@ -256,12 +255,12 @@ bindsym $mod+F5 killall polybar && gaps 0
 floating_modifier $mod
 
 #For no window bar
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 hide_edge_borders both
 
 #inner and outer gaps
-gaps inner 5
-gaps outer 3
+gaps inner 2
+gaps outer 2
 
 # Color variables 
 set $bg-color            #00000000
@@ -288,12 +287,12 @@ client.urgent             #778899FF             $bg-color       $text-color     
 # client.background                   		$bg-color
 
 # Spawning programs on different workspaces
-for_window [class="qutebrowser"] move to workspace $ws1
-for_window [class="Pcmanfm"] move to workspace $ws5
-for_window [class="Firefox"] move to workspace $ws1
-for_window [class="libreoffice-startcenter"] move to workspace $ws4
-for_window [class="libreoffice-writer"] move to workspace $ws4
-for_window [class="libreoffice-calc"] move to workspace $ws4
+# for_window [class="qutebrowser"] move to workspace $ws1
+# for_window [class="Pcmanfm"] move to workspace $ws5
+# for_window [class="Firefox"] move to workspace $ws1
+# for_window [class="libreoffice-startcenter"] move to workspace $ws4
+# for_window [class="libreoffice-writer"] move to workspace $ws4
+# for_window [class="libreoffice-calc"] move to workspace $ws4
 # for_window [class="Google-chrome"] move to workspace $ws4
 # for_window [class="Nautilus"] move to workspace $ws5
 
