@@ -14,7 +14,7 @@ badd +300 man://grep(1)
 badd +68 man://w3m(1)
 badd +253 man://feh(1)
 badd +1 man://xbindkeys(1)
-badd +1 man://xdotool(1)
+badd +330 man://xdotool(1)
 badd +114 man://xsel(1x)
 badd +136 man://google-chrome-stable(1)
 badd +211 man://xprop(1)
@@ -24,7 +24,6 @@ badd +139 man://dmenu(1)
 badd +43 man://xev(1)
 badd +1 man://systool(1)
 badd +124 man://xwininfo(1)
-badd +315 man://pacman(8)
 badd +43 man://yay(8)
 badd +1 man://lsmod(8)
 badd +1 man://insmod(8)
@@ -38,6 +37,8 @@ badd +1 man://xargs(1)
 badd +81 man://pip(1)
 badd +1 man://pip-search(1)
 badd +105 man://pip-install(1)
+badd +1 man://mupdf(1)
+badd +1 man://tmux(1)
 argglobal
 %argdel
 set splitbelow splitright
@@ -48,7 +49,7 @@ set winminwidth=0
 set winwidth=1
 argglobal
 enew
-file man://pacman(8)
+file man://tmux(1)
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}

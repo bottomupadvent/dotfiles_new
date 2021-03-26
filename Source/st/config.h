@@ -6,18 +6,20 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Misc Tamsyn:pixelsize=16:antialias=true:autohint=true";
-static int borderpx = 1;
+static int borderpx = 2;
 
 /*
  * What program is execed by st depends of these precedence rules:
  * 1: program passed with -e
- * 2: utmp option
+ * 2: scroll and/or utmp
  * 3: SHELL environment variable
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
 static char *shell = "/bin/sh";
 char *utmp = NULL;
+/* scroll program: to enable use a string like "scroll" */
+char *scroll = "scroll";
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -30,9 +32,9 @@ static float chscale = 1.0;
 /*
  * word delimiter string
  *
- * More advanced example: " `'\"()[]{}"
+ * More advanced example: L" `'\"()[]{}"
  */
-char *worddelimiters = " ";
+wchar_t *worddelimiters = L" ";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
@@ -41,9 +43,18 @@ static unsigned int tripleclicktimeout = 600;
 /* alt screens */
 int allowaltscreen = 1;
 
-/* frames per second st should at maximum draw to the screen */
-static unsigned int xfps = 120;
-static unsigned int actionfps = 30;
+/* allow certain non-interactive (insecure) window operations such as:
+   setting the clipboard text */
+int allowwindowops = 0;
+
+/*
+ * draw latency range in ms - from new content/keypress/etc until drawing.
+ * within this range, st draws when content stops arriving (idle). mostly it's
+ * near minlatency, but it waits longer for slow updates to avoid partial draw.
+ * low minlatency will tear/flicker more, as it can "detect" idle too early.
+ */
+static double minlatency = 08;
+static double maxlatency = 33;
 
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
@@ -82,30 +93,33 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* bg opacity */
-unsigned int alpha = 0xed;
-
+/* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	"#1c1c1c", /* prev color - 282828 hard contrast: #1d2021 / soft contrast: #32302f */
-	"#cc241d",
-	"#98971a",
-	"#d79921",
-	"#458588",
-	"#b16286",
-	"#689d6a",
-	"#a89984",
-	"#928374",
-	"#fb4934",
-	"#b8bb26",
-	"#fabd2f",
-	"#83a598",
-	"#d3869b",
-	"#8ec07c",
-	"#ebdbb2",
-	 [255] = 0,
+	/* 8 normal colors */
+	"black",
+	"red3",
+	"green3",
+	"yellow3",
+	"blue2",
+	"magenta3",
+	"cyan3",
+	"gray90",
+
+	/* 8 bright colors */
+	"gray50",
+	"red",
+	"green",
+	"yellow",
+	"#5c5cff",
+	"magenta",
+	"cyan",
+	"white",
+
+	[255] = 0,
+
 	/* more colors can be added after 255 to use with DefaultXX */
-	"black",   /* 256 -> bg */
-	"white",   /* 257 -> fg */
+	"#cccccc",
+	"#555555",
 };
 
 
@@ -113,10 +127,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 255;
+unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
-static unsigned int defaultcs = 15;
-static unsigned int defaultrcs = 0;
+static unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
 
 /*
  * Default shape of cursor
@@ -148,67 +162,28 @@ static unsigned int mousebg = 0;
 static unsigned int defaultattr = 11;
 
 /*
- * Xresources preferences to load at startup
+ * Force mouse select/shortcuts while mask is active (when MODE_MOUSE is set).
+ * Note that if you want to use ShiftMask with selmasks, set this to an other
+ * modifier, set to 0 to not use it.
  */
-ResourcePref resources[] = {
-	{ "font",         STRING,  &font },
-	{ "color0",       STRING,  &colorname[0] },
-	{ "color1",       STRING,  &colorname[1] },
-	{ "color2",       STRING,  &colorname[2] },
-	{ "color3",       STRING,  &colorname[3] },
-	{ "color4",       STRING,  &colorname[4] },
-	{ "color5",       STRING,  &colorname[5] },
-	{ "color6",       STRING,  &colorname[6] },
-	{ "color7",       STRING,  &colorname[7] },
-	{ "color8",       STRING,  &colorname[8] },
-	{ "color9",       STRING,  &colorname[9] },
-	{ "color10",      STRING,  &colorname[10] },
-	{ "color11",      STRING,  &colorname[11] },
-	{ "color12",      STRING,  &colorname[12] },
-	{ "color13",      STRING,  &colorname[13] },
-	{ "color14",      STRING,  &colorname[14] },
-	{ "color15",      STRING,  &colorname[15] },
-	{ "background",   STRING,  &colorname[256] },
-	{ "foreground",   STRING,  &colorname[257] },
-	{ "cursorColor",  STRING,  &colorname[258] },
-	{ "termname",     STRING,  &termname },
-	{ "shell",        STRING,  &shell },
-	{ "xfps",         INTEGER, &xfps },
-	{ "actionfps",    INTEGER, &actionfps },
-	{ "blinktimeout", INTEGER, &blinktimeout },
-	{ "bellvolume",   INTEGER, &bellvolume },
-	{ "tabspaces",    INTEGER, &tabspaces },
-	{ "cwscale",      FLOAT,   &cwscale },
-	{ "chscale",      FLOAT,   &chscale },
-	{ "alpha",      INTEGER,   &alpha },
-};
+static uint forcemousemod = ShiftMask;
 
 /*
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
  */
 static MouseShortcut mshortcuts[] = {
-	/* button               mask            string */
-	{ Button4,              XK_NO_MOD,      "\031" },
-	{ Button5,              XK_NO_MOD,      "\005" },
+	/* mask                 button   function        argument       release */
+	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
+	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
+	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
-
-MouseKey mkeys[] = {
-	/* button               mask            function        argument */
-	{ Button4,              ShiftMask,      kscrollup,      {.i =  1} },
-	{ Button5,              ShiftMask,      kscrolldown,    {.i =  1} },
-	{ Button4,              MODKEY,         kscrollup,      {.i =  1} },
-	{ Button5,              MODKEY,         kscrolldown,    {.i =  1} },
-	{ Button4,              MODKEY|ShiftMask,         zoom,      {.f =  +1} },
-	{ Button5,              MODKEY|ShiftMask,         zoom,    {.f =  -1} },
-};
-
-static char *openurlcmd[] = { "/bin/sh", "-c",
-	"xurls | uniq | dmenu -l 10 | xargs -r xdg-open",
-	"externalpipe", NULL };
+#define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -216,35 +191,53 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ MODKEY|ShiftMask,     XK_Prior,       zoom,           {.f = +1} },
-	{ MODKEY|ShiftMask,     XK_Next,        zoom,           {.f = -1} },
-	{ MODKEY,		XK_Home,	zoomreset,	{.f =  0} },
-	{ ShiftMask,            XK_Insert,      clippaste,      {.i =  0} },
-	{ MODKEY|ShiftMask,     XK_C,           clipcopy,       {.i =  0} },
-	{ MODKEY|ShiftMask,     XK_V,           clippaste,      {.i =  0} },
-	{ MODKEY,               XK_p,           selpaste,       {.i =  0} },
-	{ MODKEY,		XK_Num_Lock,	numlock,	{.i =  0} },
-	{ MODKEY,               XK_Control_L,   iso14755,       {.i =  0} },
-	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
-	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
-	{ ControlMask|ShiftMask, XK_K,  		kscrollup,      {.i =  1} },
-	{ ControlMask|ShiftMask, XK_J,   	kscrolldown,    {.i =  1} },
-	{ MODKEY,            	XK_Up,  	kscrollup,      {.i =  1} },
-	{ MODKEY,            	XK_Down,   	kscrolldown,    {.i =  1} },
-	{ ControlMask|ShiftMask, XK_U,		kscrollup,      {.i = -1} },
-	{ ControlMask|ShiftMask, XK_D,		kscrolldown,   	{.i = -1} },
-	{ MODKEY|ShiftMask,     XK_Up,          zoom,           {.f = +1} },
-	{ MODKEY|ShiftMask,     XK_Down,        zoom,           {.f = -1} },
-	{ MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
-	{ MODKEY|ShiftMask,     XK_J,           zoom,           {.f = -1} },
-	{ MODKEY|ShiftMask,     XK_U,           zoom,           {.f = +2} },
-	{ MODKEY|ShiftMask,     XK_D,           zoom,           {.f = -2} },
-	{ ControlMask|ShiftMask, XK_L,		externalpipe,	{ .v = openurlcmd } },
+	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
+	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
+	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
+	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
+	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
+	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+};
+
+/* Xresources preferences to load at startup
+*/
+ResourcePref resources[] = {
+              { "font",         STRING,  &font },
+              { "color0",       STRING,  &colorname[0] },
+              { "color1",       STRING,  &colorname[1] },
+              { "color2",       STRING,  &colorname[2] },
+              { "color3",       STRING,  &colorname[3] },
+              { "color4",       STRING,  &colorname[4] },
+              { "color5",       STRING,  &colorname[5] },
+              { "color6",       STRING,  &colorname[6] },
+              { "color7",       STRING,  &colorname[7] },
+              { "color8",       STRING,  &colorname[8] },
+              { "color9",       STRING,  &colorname[9] },
+              { "color10",      STRING,  &colorname[10] },
+              { "color11",      STRING,  &colorname[11] },
+              { "color12",      STRING,  &colorname[12] },
+              { "color13",      STRING,  &colorname[13] },
+              { "color14",      STRING,  &colorname[14] },
+              { "color15",      STRING,  &colorname[15] },
+              { "background",   STRING,  &colorname[256] },
+              { "foreground",   STRING,  &colorname[257] },
+              { "cursorColor",  STRING,  &colorname[258] },
+              { "termname",     STRING,  &termname },
+              { "shell",        STRING,  &shell },
+              { "minlatency",   INTEGER, &minlatency },
+              { "maxlatency",   INTEGER, &maxlatency },
+              { "blinktimeout", INTEGER, &blinktimeout },
+              { "bellvolume",   INTEGER, &bellvolume },
+              { "tabspaces",    INTEGER, &tabspaces },
+              { "borderpx",     INTEGER, &borderpx },
+              { "cwscale",      FLOAT,   &cwscale },
+              { "chscale",      FLOAT,   &chscale },
 };
 
 /*
+ *
  * Special keys (change & recompile st.info accordingly)
  *
  * Mask value:
@@ -259,10 +252,6 @@ static Shortcut shortcuts[] = {
  * * 0: no value
  * * > 0: cursor application mode enabled
  * * < 0: cursor application mode disabled
- * crlf value
- * * 0: no value
- * * > 0: crlf mode is enabled
- * * < 0: crlf mode is disabled
  *
  * Be careful with the order of the definitions because st searches in
  * this table sequentially, so any XK_ANY_MOD must be in the last
@@ -280,13 +269,6 @@ static KeySym mappedkeys[] = { -1 };
  * numlock (Mod2Mask) and keyboard layout (XK_SWITCH_MOD) are ignored.
  */
 static uint ignoremod = Mod2Mask|XK_SWITCH_MOD;
-
-/*
- * Override mouse-select while mask is active (when MODE_MOUSE is set).
- * Note that if you want to use ShiftMask with selmasks, set this to an other
- * modifier, set to 0 to not use it.
- */
-static uint forceselmod = ShiftMask;
 
 /*
  * This is the huge key array which defines all compatibility to the Linux
@@ -521,6 +503,6 @@ static uint selmasks[] = {
  * of single wide characters.
  */
 static char ascii_printable[] =
-" !\"#$%&'()*+,-./0123456789:;<=>?"
-"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
-"`abcdefghijklmnopqrstuvwxyz{|}~";
+	" !\"#$%&'()*+,-./0123456789:;<=>?"
+	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
+	"`abcdefghijklmnopqrstuvwxyz{|}~";

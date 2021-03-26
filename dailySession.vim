@@ -11,10 +11,10 @@ badd +106 .zshrc
 badd +21 .zshenv
 badd +1 .gitignore
 badd +1 .vimrc
-badd +3 vimwiki/index.md
-badd +22 vimwiki/Tasks.md
+badd +1 vimwiki/index.md
+badd +1 vimwiki/Tasks.md
 badd +630 vimwiki/Linux\ Book.md
-badd +9 vimwiki/Redundant\ Stuff.md
+badd +12 vimwiki/Redundant\ Stuff.md
 badd +11 .scripts/c/test.c
 badd +15 .scripts/c/test_calc.c
 badd +83 .tmux.conf
@@ -32,7 +32,7 @@ badd +1 .config/surfraw/conf
 badd +16 .config/polybar/config
 badd +49 .w3m/cgi-bin/fzf_surfraw.cgi
 badd +10 .config/polybar/launch.sh
-badd +67 .xbindkeysrc
+badd +78 .xbindkeysrc
 badd +9 .scripts/shell_scripts/gui_webpage_to_w3m.sh
 badd +1 .config/mimeapps.list
 badd +1 vimwiki/Baba.md
@@ -43,9 +43,12 @@ badd +1 vimwiki/Linux_Read.md
 badd +17 .tmux/plugins/vim-tmux-navigator/vim-tmux-navigator.tmux
 badd +1 vimwiki/College.md
 badd +64 vimwiki/Aai.md
-badd +8 Source/st/config.h
+badd +13 Source/st/config.h
 badd +254 .config/i3/config
-badd +40 .config/qutebrowser/config.py
+badd +21 .config/qutebrowser/config.py
+badd +23 .Xresources
+badd +5 vimwiki/Configs\ Stuff.md
+badd +2 .config/nvim/coc-settings.json
 argglobal
 %argdel
 $argadd .zshrc
@@ -66,18 +69,18 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 40 - ((13 * winheight(0) + 9) / 19)
+let s:l = 21 - ((12 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-40
-normal! 031|
+21
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=25 winwidth=85 winminheight=1 winminwidth=1 shortmess=filnxtToOF
+set winheight=25 winwidth=85 winminheight=1 winminwidth=1 shortmess=filnxtToOFc
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if file_readable(s:sx)
   exe "source " . fnameescape(s:sx)

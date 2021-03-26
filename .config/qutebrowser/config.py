@@ -20,7 +20,7 @@ config.bind('K', 'forward', mode='normal')
 c.confirm_quit = ["always"]
 # c.content.developer_extras = True
 c.scrolling.smooth = True
-# c.content.user_stylesheets = "/home/sols/Source/darculized-everything-css/css/darculized/darculized-all-sites.css"
+c.content.user_stylesheets = "/home/sols/Source/darculized-everything-css/css/darculized/darculized-all-sites.css"
 
 # Fonts
 # c.fonts.monospace = "monospace"

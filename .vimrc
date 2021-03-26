@@ -6,7 +6,7 @@ Plug 'preservim/tagbar'
 Plug 'mcchrish/nnn.vim'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
-Plug '907th/vim-auto-save'
+" Plug '907th/vim-auto-save'
 Plug 'easymotion/vim-easymotion'
 " Supertab is needed for Ultisnips and deoplete to work well together
 " Plug 'ervandew/supertab'
@@ -25,7 +25,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'Raimondi/delimitMate'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim' 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -39,6 +39,9 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 call plug#end()
 
 " "==========BASIC LET AND SET==========="
+"" statusline
+set statusline                          " left align
+
 " let g:clang_library_path='/usr/lib64/libclang.so.11.1'
 " let g:suda#prompt = 'Password: '
 " let g:suda_smart_edit = 1
@@ -173,7 +176,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -224,9 +227,10 @@ endfunction
 
 
 
-let g:auto_save = 1  	    " enable AutoSave plugin on Vim startup
-let g:auto_save_events = ["InsertLeave", "TextChanged"]
-let g:auto_save_silent = 1  " do not display the auto-save notification
+" let g:auto_save = 1  	    " enable AutoSave plugin on Vim startup
+" let g:auto_save_events = ["InsertLeave", "TextChanged"]
+" let g:auto_save_silent = 1  " do not display the auto-save notification
+
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 0
 set termguicolors           " Enable GUI colors for the terminal to get truecolor
@@ -415,17 +419,19 @@ nmap <leader>c :History: <cr>
 nmap <leader>C :call fzf#vim#search_history() <cr>
 
 
+
+
 " " ======= COLORS ======== "
-let g:lightline = {
-      \ 'colorscheme': 'nord',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename' , 'buffernumber', 'modified' ] ],
-      \ 
-      \   'right': [ [ 'percent', 'fileformat', 'fileencoding', 'filetype' ] ]
-      \},
-      \   'component_function': {
-      \         'buffernumber': 'Bufno'
-      \ },
-      \ }
+" let g:lightline = {
+"       \ 'colorscheme': 'nord',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'gitbranch', 'readonly', 'filename' , 'buffernumber', 'modified' ] ],
+"       \ 
+"       \   'right': [ [ 'percent', 'fileformat', 'fileencoding', 'filetype' ] ]
+"       \},
+"       \   'component_function': {
+"       \         'buffernumber': 'Bufno'
+"       \ },
+"       \ }
 colorscheme base16-nord

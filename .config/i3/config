@@ -23,11 +23,11 @@ set $mod Mod1
 set $term st
 
 #Workspace settings 
-set $ws1 "1" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
-set $ws2 "2" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
-set $ws3 "3" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
-set $ws4 "4" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
-set $ws5 "5" gaps right current set 0; gaps left current set 0; gaps top current set 0; gaps bottom current set 0;
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -132,21 +132,21 @@ bindsym $mod+r                   [instance="ranger"] scratchpad show;
 bindsym $mod+b                   [class="firefox"] scratchpad show; 
 bindsym $mod+g                   [class="Google-chrome"] scratchpad show; 
 bindsym $mod+o                   [instance="w3m"] scratchpad show; 
-bindsym $mod+m                   [instance="Music"] scratchpad show; 
+bindsym $mod+m                   [instance="ManPages"] scratchpad show; 
 bindsym $mod+i                   [instance="IRC"] scratchpad show; 
-bindsym $mod+e                   [instance="shell"] scratchpad show; 
+bindsym $mod+e                   [instance="configs"] scratchpad show; 
 
 # Sticky toggle
 	# bindsym $mod+i                    sticky toggle
 
 # Dynamic resize
-bindsym $mod+Shift+y	resize shrink width 5 px or 5 ppt
-bindsym $mod+Shift+i	resize shrink height 5 px or 5 ppt
-bindsym $mod+Shift+u	resize grow height 5 px or 5 ppt
-bindsym $mod+Shift+o	resize grow width 5 px or 5 ppt
+bindsym $mod+Shift+y	resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+i	resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+u	resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+o	resize grow width 10 px or 10 ppt
 # Gaps
-bindsym $mod+Shift+d	    gaps inner current set 7; gaps outer current set 3
-bindsym $mod+Shift+t        gaps inner current set 1; gaps outer current set 1
+# bindsym $mod+Shift+d	    gaps inner current set 7; gaps outer current set 3
+# bindsym $mod+Shift+t        gaps inner current set 1; gaps outer current set 1
 # bindsym $mod+z              gaps outer current plus 2
 # bindsym $mod+Shift+z        gaps outer current minus 2
 bindsym $mod+f              fullscreen toggle
@@ -156,7 +156,7 @@ bindsym $mod+x                      exec --no-startup-id ~/.config/i3/lock.sh
 # bindsym $mod+Shift+p                exec psensor
 bindsym $mod+Shift+m                exec transset -a --dec .10
 bindsym $mod+Shift+n                exec transset -a --inc .10
-bindsym $mod+d                	    exec dmenu_run
+bindsym $mod+d                	    exec dmenu_run -b
 bindsym $mod+Return                 exec $term; exec "bash -c 'sleep 0.2s;i3-msg floating enable'"
 bindsym $mod+Home                   exec pcmanfm
 # bindsym $mod+Home                   exec nautilus --no-desktop
@@ -220,12 +220,12 @@ bindsym $mod+F4                     exec ~/.scripts/shell_scripts/redshift.sh
 exec --no-startup-id unclutter
 
 # exec --no-startup-id compton --config ~/.config/compton/config -b 
-# exec feh --bg-fill ~/.config/wall.png
+exec feh --bg-fill ~/.config/wall.png
 # exec --no-startup-id bash ~/.config/polybar/launch.sh
 exec --no-startup-id nmcli networking on
 exec_always --no-startup-id sleep 1 && xmodmap ~/.Xmodmap
 # exec_always --no-startup-id sleep 2.5 && bash ~/Solstice/bash_scripts/alsa/alsa.sh
-exec_always --no-startup-id sleep 1 && xset r rate 250 0
+exec_always --no-startup-id sleep 1 && xset r rate 300 50
 focus_follows_mouse no
 
 
@@ -241,12 +241,29 @@ focus_follows_mouse no
 # exec --no-startup-id sudo mount -a
 
 # SETTINGS
-# bar {
-# polybar white
-# } 
+bar {
+    # output            LVDS1
+    status_command    i3status
+    position          bottom
+    mode              dock
+    workspace_buttons yes
+    tray_output       none
+    
+    font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
-# bindsym $ctrl+tab bar hidden_state toggle
-bindsym $mod+F5 killall polybar && gaps 0
+    colors {
+        background #000000
+        statusline #ffffff
+
+        focused_workspace  #ffffff #285577
+        active_workspace   #ffffff #333333
+        inactive_workspace #888888 #222222
+        urgent_workspace   #ffffff #900000
+    }
+}
+
+bindsym $ctrl+tab bar hidden_state toggle
+# bindsym $mod+F5 killall polybar && gaps 0
 
 
 
@@ -255,36 +272,28 @@ bindsym $mod+F5 killall polybar && gaps 0
 floating_modifier $mod
 
 #For no window bar
-for_window [class="^.*"] border pixel 2
-hide_edge_borders both
+# for_window [class="^.*"] border pixel 2
+# hide_edge_borders both
 
 #inner and outer gaps
-gaps inner 2
-gaps outer 2
+# gaps inner 2
+# gaps outer 2
 
 # Color variables 
-set $bg-color            #00000000
-set $bf-color            #00000000
-# set $bd-color            #82AAFFFF
-set $bd-color            #00000000
-set $inactive-bg-color   #00000000
-set $inactive-bd-color   #00000000
-set $text-color          #00000000
-set $inactive-text-color #1f2022FF
-# set $new                 #e7d4fc
-# set $new                 #494949
-# set $new                 #cccc00FF
-# set $new                 #82AAFFFF
-# set $new                 #b5cdff
-set $new                 #dd00d7
+# set $bg-color            #00000000
+# set $bf-color            #00000000
+# set $bd-color            #00000000
+# set $inactive-bg-color   #00000000
+# set $inactive-bd-color   #00000000
+# set $text-color          #00000000
+# set $inactive-text-color #1f2022FF
+# set $new                 #dd00d7
 
 # #                       border              	background      text                	indicator  	child border 
-client.focused            $new     		#778899FF      	#778899FF           	#778899FF	$new
-client.unfocused          $bd-color		$bd-color	$bd-color		$bd-color	$bd-color
-# client.unfocused        $inactive-b		$bg-color       $text-color          	$bg-color  	$inactive-bd-color
-client.focused_inactive   $bd-color  		$bg-color       $inactive-text-color 	$bg-color  	$bd-color
-client.urgent             #778899FF             $bg-color       $text-color          	$bg-color  	$bf-color
-# client.background                   		$bg-color
+# client.focused            $new     		#778899FF      	#778899FF           	#778899FF	$new
+# client.unfocused          $bd-color		$bd-color	$bd-color		$bd-color	$bd-color
+# client.focused_inactive   $bd-color  		$bg-color       $inactive-text-color 	$bg-color  	$bd-color
+# client.urgent             #778899FF             $bg-color       $text-color          	$bg-color  	$bf-color
 
 # Spawning programs on different workspaces
 # for_window [class="qutebrowser"] move to workspace $ws1
@@ -300,20 +309,20 @@ client.urgent             #778899FF             $bg-color       $text-color     
 
 exec --no-startup-id xrdb ~/.Xresources
 
-for_window [instance="Music"] floating enable
-for_window [instance="Music"] resize set 640 400
-for_window [instance="Music"] move scratchpad
-exec --no-startup-id $term -n Music
+for_window [instance="ManPages"] floating enable
+for_window [instance="ManPages"] resize set 640 400
+for_window [instance="ManPages"] move scratchpad
+exec --no-startup-id $term -n ManPages
 
 for_window [instance="IRC"] floating enable
 for_window [instance="IRC"] resize set 850 500
 for_window [instance="IRC"] move scratchpad
 exec --no-startup-id $term -n IRC
 
-for_window [instance="shell"] floating enable
-for_window [instance="shell"] resize set 440 150
-for_window [instance="shell"] move scratchpad
-exec --no-startup-id $term -n shell
+for_window [instance="configs"] floating enable
+for_window [instance="configs"] resize set 850 500
+for_window [instance="configs"] move scratchpad
+exec --no-startup-id $term -n configs
 
 # Remaps the caps lock button to escape and uses the US international keyboard with dead keys
 exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option caps:escape
