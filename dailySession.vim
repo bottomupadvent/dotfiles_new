@@ -45,14 +45,15 @@ badd +1 vimwiki/College.md
 badd +64 vimwiki/Aai.md
 badd +13 Source/st/config.h
 badd +254 .config/i3/config
-badd +21 .config/qutebrowser/config.py
+badd +1 .config/qutebrowser/config.py
 badd +23 .Xresources
 badd +5 vimwiki/Configs\ Stuff.md
 badd +2 .config/nvim/coc-settings.json
+badd +118 Source/dwm/config.h
 argglobal
 %argdel
 $argadd .zshrc
-edit .config/qutebrowser/config.py
+edit Source/dwm/config.h
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -69,12 +70,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 21 - ((12 * winheight(0) + 15) / 30)
+let s:l = 118 - ((13 * winheight(0) + 13) / 27)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-21
-normal! 0
+118
+normal! 06|
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
