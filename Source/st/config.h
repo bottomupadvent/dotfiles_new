@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Misc Tamsyn:pixelsize=16:antialias=true:autohint=true";
+static char *font = "Roboto Mono for Powerline:pixelsize=14:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -53,7 +53,7 @@ int allowwindowops = 0;
  * near minlatency, but it waits longer for slow updates to avoid partial draw.
  * low minlatency will tear/flicker more, as it can "detect" idle too early.
  */
-static double minlatency = 08;
+static double minlatency = 8;
 static double maxlatency = 33;
 
 /*

@@ -11,6 +11,7 @@ c.keyhint.delay = 0
 
 # Tabs related
 c.tabs.new_position.unrelated = "next"
+c.tabs.background = True
 config.bind('L', 'tab-next', mode='normal')
 config.bind('H', 'tab-prev', mode='normal')
 config.bind('J', 'back', mode='normal')
@@ -37,9 +38,9 @@ c.fonts.prompts = "FiraCode Nerd Font Mono"
 c.fonts.statusbar = "FiraCode Nerd Font Mono"
 # c.fonts.tabs = "monospace"
 
-c.fonts.web.family.cursive = "Inconsolata"
-c.fonts.web.family.fantasy = "Inconsolata"
-c.fonts.web.family.fixed = "Inconsolata"
-c.fonts.web.family.sans_serif = "Inconsolata"
-c.fonts.web.family.serif = "Inconsolata"
-c.fonts.web.family.standard = "Inconsolata"
+c.fonts.web.family.cursive = "Misc Tamsyn"
+c.fonts.web.family.fantasy = "Misc Tamsyn"
+c.fonts.web.family.fixed = "Misc Tamsyn"
+c.fonts.web.family.sans_serif = "Misc Tamsyn"
+c.fonts.web.family.serif = "Misc Tamsyn"
+c.fonts.web.family.standard = "Misc Tamsyn"

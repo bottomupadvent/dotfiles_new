@@ -73,7 +73,7 @@ alt+F10
 "tmux switch-client -t web:0.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
 alt+w
 
-"tmux switch-client -t temp:2.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
+"tmux switch-client -t temp:2.1 ; xdotool search --name 'Arch*' windowactivate"
 alt+m
 
 "tmux switch-client -t temp:1.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"

@@ -2,6 +2,7 @@
 call plug#begin()
 Plug 'preservim/nerdtree'
 " Write to non writable files
+Plug 'chrisbra/Colorizer'
 Plug 'preservim/tagbar'
 Plug 'mcchrish/nnn.vim'
 Plug 'godlygeek/tabular'
