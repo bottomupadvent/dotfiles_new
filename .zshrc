@@ -24,6 +24,7 @@ _comp_options+=(globdots)		# Include hidden files.
 eval "$(fasd --init auto)"
 
 # ++++++++++++++++ FUNCTIONS +++++++++++++++++ #
+
 bd() {
     baloosearch type:document "$@"
 }
