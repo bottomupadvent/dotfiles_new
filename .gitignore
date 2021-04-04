@@ -1,7 +1,10 @@
 *.db
 *.capx
 *.doc
-# *.JPG
+*.jpeg
+*.jpg
+*.png
+*.JPG
 *.vox
 *.obj
 *.mtl

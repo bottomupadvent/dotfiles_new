@@ -97,12 +97,12 @@ label = %date%
  
 [module/network]
 type = internal/network
-interface = wlp0s19f2u4u3
+interfack = wlp0s19f2u4u3
 ; Seconds to sleep between updates
 ; Default: 1
 interval = 3.0
 accumulate-stats = true
-; unknown-as-up = true
+unknown-as-up = true
 
 
 ; label-disconnected = %essid%

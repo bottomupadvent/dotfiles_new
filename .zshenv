@@ -12,6 +12,7 @@ export FZF_DEFAULT_COMMAND='ag --depth 4 --hidden -p ~/.gitignore --ignore .git 
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_ALT_C_COMMAND="fd --max-depth 6 --ignore-file ~/.gitignore -H -t d . /"
 export FZF_CTRL_T_COMMAND="$FZF_ALT_C_COMMAND"
+export CC="clang"
 export KEYTIMEOUT=1
 export BROWSER=surf
 export BROWSERCLI=w3m
