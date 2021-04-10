@@ -52,35 +52,38 @@
 
 "~/.scripts/shell_scripts/gui_webpage_to_w3m.sh"
 control+alt+w
+
 # m:0x18 + c:46  # Equivalent to control+alt+w
     # m:0x1c + c:56
     # Control+Alt+Mod2 + Alt_L
     # Control+Alt+Mod2 + b
 
-"tmux switch-client -t temp:0.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
-alt+e
+# "tmux switch-client -t temp:0.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
+# alt+e
 
-"tmux switch-client -t web:1.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
-alt+i
+# "tmux switch-client -t web:1.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
+# alt+i
 
-"tmux switch-client -t temp:3.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
-alt+f
+# "tmux switch-client -t temp:3.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
+# alt+f
 
-"tmux switch-client -t web:3.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
-alt+F10
+# "tmux switch-client -t web:3.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
+# alt+F10
+
 # "konsole_winID=$(xdotool search --name '~ : tmux: client') ; xdotool windowactivate $konsole_winID ; tmux switch-client -t web:0.1"
 # alt+w
-"tmux switch-client -t web:0.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
-alt+w
 
-"tmux switch-client -t temp:2.1 ; xdotool search --name 'Arch*' windowactivate"
-alt+m
+# "tmux switch-client -t web:0.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
+# alt+w
 
-"tmux switch-client -t temp:1.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
-alt+x
+# "tmux switch-client -t temp:2.1 ; xdotool search --name 'Arch*' windowactivate"
+# alt+m
 
-"tmux switch-client -t web:4.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
-alt+y
+# "tmux switch-client -t temp:1.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
+# alt+x
+
+# "tmux switch-client -t web:4.1 ; tmux_winID=$(xdotool search --name 'Arch*') ; xdotool windowactivate $tmux_winID"
+# alt+y
 
 # "xdotool sleep 0.04 key ctrl+BackSpace"
 #   Shift+Mod2 + BackSpace
