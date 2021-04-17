@@ -106,6 +106,7 @@ bindkey -v '^?' backward-delete-char
 # ++++++++++++++++++ ALIASES +++++++++++++++++++++ #
 alias nnn="nnn -e"
 # alias ls="nnn -e"
+alias locate="locate -i "
 alias vs="cd ~/vimwiki ; git status ; cd \"$OLDPWD\""
 alias hp="hp-print $@"
 alias hs="hp-scan --mode=color -o $@" 
