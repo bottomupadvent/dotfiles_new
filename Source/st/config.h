@@ -5,7 +5,10 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Roboto Mono for Powerline:pixelsize=14:antialias=true:autohint=true";
+static char *font = "FiraCode Nerd Font Mono:pixelsize=13:antialias=true:autohint=true";
+/* Nice looking fonts:-
+ 1. FiraCode Nerd Font Mono also looks 
+*/
 
 static int borderpx = 20;
 
