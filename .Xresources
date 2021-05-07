@@ -34,7 +34,6 @@
 #define nord15 #B48EAD
 
 
-
 ! *fading: 35
 ! *fadeColor: nord3
 ! *.cursorColor:  nord4
