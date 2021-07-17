@@ -7,7 +7,7 @@ Plug 'preservim/tagbar'
 Plug 'mcchrish/nnn.vim'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
-" Plug '907th/vim-auto-save'
+Plug '907th/vim-auto-save'
 Plug 'easymotion/vim-easymotion'
 " Supertab is needed for Ultisnips and deoplete to work well together
 " Plug 'ervandew/supertab'
@@ -228,9 +228,9 @@ endfunction
 
 
 
-" let g:auto_save = 1  	    " enable AutoSave plugin on Vim startup
-" let g:auto_save_events = ["InsertLeave", "TextChanged"]
-" let g:auto_save_silent = 1  " do not display the auto-save notification
+let g:auto_save = 1  	    " enable AutoSave plugin on Vim startup
+let g:auto_save_events = ["InsertLeave", "TextChanged"]
+let g:auto_save_silent = 1  " do not display the auto-save notification
 
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 0
@@ -257,10 +257,11 @@ set mouse=nv
 let mapleader = " "
 let maplocalleader = '\'
 " dynamic current window sizing from TBot Art of Vim
-" set winwidth=90
-" set winheight=25
+set winwidth=90
+set winheight=25
 
 
+let g:vimwiki_url_maxsave = 30
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
@@ -294,6 +295,17 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 
 " " ========== REMAPS ========= "
 nnoremap <leader>m :Man 
+" " Vimwiki remaps "
+nnoremap <leader>vs :call Search_wiki()
+
+function Search_wiki()
+    let search_term = input("Enter pattern: ") 
+    execute "vsplit " . "VimwikiSearch search_term"
+    " execute "VWS " input("Enter Pattern: ")
+endfunction
+
+
+
 nnoremap n nzz
 nnoremap N Nzz
 " "_d register does not copy content to system clipboard
